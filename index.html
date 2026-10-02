@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+<meta charset="utf-8">
+<meta name="theme-color" content="#F7F5F2">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Edu Nova | Nepal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F7F5F2; --surface:#FFFFFF; --ink:#1B2236; --muted:#566079; --line:#DDD8D0;
+  --red:#C8102E; --red-ink:#FFFFFF; --blue:#003893; --sky:#E3ECFB; --good:#0B7A4B; --warn:#B45309;
+  --font:"Mukta","Noto Sans Devanagari","Segoe UI",system-ui,sans-serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#10131D; --surface:#1A2030; --ink:#F0F2F8; --muted:#A9B1C7; --line:#2C3550;
+    --red:#FF5C73; --red-ink:#10131D; --blue:#8FB0FF; --sky:#1C2A4D; --good:#4DD39A; --warn:#F3B25C;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#10131D; --surface:#1A2030; --ink:#F0F2F8; --muted:#A9B1C7; --line:#2C3550;
+  --red:#FF5C73; --red-ink:#10131D; --blue:#8FB0FF; --sky:#1C2A4D; --good:#4DD39A; --warn:#F3B25C;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px);height:100%}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;min-height:100%;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:1.0625rem;line-height:1.65}
+h1,h2,h3{margin:0;line-height:1.2;font-weight:800}
+h1{font-size:clamp(2rem,7vw,3.4rem)}
+h2{font-size:clamp(1.5rem,4.5vw,2.1rem)}
+h3{font-size:1.15rem;font-weight:600}
+p{margin:0}
+:focus-visible{outline:3px solid var(--blue);outline-offset:2px;border-radius:4px}
+.wrap{max-width:1000px;margin:0 auto;padding:0 18px}
+.muted{color:var(--muted)}
+button,input,select,textarea{font:inherit;color:inherit}
+.btn{border:2px solid var(--red);background:var(--red);color:var(--red-ink);font-weight:700;padding:.65rem 1.2rem;border-radius:12px;cursor:pointer;min-height:48px}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn.sm{min-height:40px;padding:.3rem .8rem;font-size:.95rem}
+input,select,textarea{background:var(--bg);border:2px solid var(--line);border-radius:10px;padding:.55rem .7rem;min-height:46px;width:100%}
+input:focus-visible,select:focus-visible,textarea:focus-visible{border-color:var(--blue)}
+
+/* top bar */
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 0}
+.brand{font-weight:800;font-size:1.2rem;display:flex;align-items:center;gap:8px}
+.brand i{width:14px;height:22px;background:var(--red);clip-path:polygon(0 0,100% 50%,0 50%,100% 100%,0 100%);display:inline-block}
+.top .ctl{display:flex;gap:8px}
+.tabs{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:2px solid var(--line);padding-top:env(safe-area-inset-top,0px)}
+.tabs .wrap{display:flex;gap:6px;overflow-x:auto;padding-top:8px;padding-bottom:8px}
+.tab{flex:0 0 auto;border:2px solid transparent;background:transparent;font-weight:600;padding:.4rem .95rem;border-radius:999px;cursor:pointer;min-height:44px;color:var(--ink)}
+.tab[aria-selected="true"]{background:var(--blue);color:var(--surface);}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .tab[aria-selected="true"]{color:#10131D}}
+:root[data-theme="dark"] .tab[aria-selected="true"]{color:#10131D}
+.view{display:none;padding:28px 0 60px}
+.view.on{display:block}
+
+/* hero */
+.hero{background:var(--sky);border-radius:0 0 28px 28px;overflow:hidden;position:relative}
+.hero .in{padding:26px 0 150px;position:relative;z-index:1;max-width:620px}
+.hero p.lead{margin:14px 0 22px;color:var(--muted);font-size:1.15rem}
+.hero svg{position:absolute;left:0;right:0;bottom:0;width:100%;height:150px;display:block}
+.cta{display:flex;gap:10px;flex-wrap:wrap}
+
+.sec{margin-top:40px}
+.sec>h2{margin-bottom:6px}
+.grid{display:grid;gap:14px;margin-top:18px}
+@media(min-width:720px){.grid.c2{grid-template-columns:1fr 1fr}.grid.c3{grid-template-columns:repeat(3,1fr)}}
+.card{background:var(--surface);border:2px solid var(--line);border-radius:16px;padding:18px}
+.card .prob{color:var(--red);font-weight:700;font-size:.98rem}
+.card h3{margin:2px 0 6px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}
+.chip{border:2px solid var(--line);background:var(--surface);padding:.3rem .85rem;border-radius:999px;cursor:pointer;font-weight:600;min-height:42px}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+
+/* notes */
+details.note{background:var(--surface);border:2px solid var(--line);border-radius:14px;padding:4px 16px;margin-bottom:10px}
+details.note summary{cursor:pointer;padding:12px 0;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:10px;align-items:center}
+details.note summary::-webkit-details-marker{display:none}
+details.note[open] summary{border-bottom:1px solid var(--line);margin-bottom:10px}
+.tag{font-size:.82rem;font-weight:600;border:1.5px solid var(--line);color:var(--muted);padding:0 .55rem;border-radius:999px;white-space:nowrap}
+.body{padding-bottom:12px}
+.body ul{margin:6px 0;padding-left:1.2rem}
+.body code{background:var(--bg);padding:1px 6px;border-radius:6px;border:1px solid var(--line)}
+
+/* gpa */
+.gtable{display:grid;gap:10px;margin-top:14px}
+.grow{display:grid;grid-template-columns:1fr 1fr;gap:8px;background:var(--surface);border:2px solid var(--line);border-radius:14px;padding:12px}
+.grow .full{grid-column:1/-1}
+.grow label{font-size:.85rem;color:var(--muted);display:block}
+.grow .res{grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;gap:8px;font-weight:600}
+.badge{padding:.1rem .7rem;border-radius:999px;font-weight:800;background:var(--sky);color:var(--blue)}
+.badge.ng{background:#FDE3E6;color:#9B0E24}
+.total{margin-top:16px;background:var(--blue);color:#fff;border-radius:18px;padding:18px;display:flex;flex-wrap:wrap;gap:6px 22px;align-items:baseline}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .total{color:#10131D}}
+:root[data-theme="dark"] .total{color:#10131D}
+.total big{font-size:2.6rem;font-weight:800;line-height:1}
+table{border-collapse:collapse;width:100%;font-size:.95rem}
+td,th{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left}
+.scroll{overflow-x:auto}
+.note-box{border-left:5px solid var(--warn);padding:8px 14px;margin-top:14px;background:var(--surface);border-radius:0 10px 10px 0;color:var(--muted);font-size:.97rem}
+
+/* tools */
+.timer{font-size:3.4rem;font-weight:800;font-variant-numeric:tabular-nums}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.task{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--line)}
+.task input[type=checkbox]{width:24px;height:24px;min-height:0;flex:0 0 auto}
+.task.done span{text-decoration:line-through;color:var(--muted)}
+.task span{flex:1}
+
+/* calendar */
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-top:12px}
+.cal .wd{text-align:center;font-weight:700;font-size:.82rem;color:var(--muted);padding:4px 0}
+.cal .wd.sat{color:var(--red)}
+.cal button.day{min-height:58px;border:2px solid var(--line);background:var(--surface);border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;line-height:1.15;padding:2px;position:relative}
+.day b{font-size:1.1rem}.day small{font-size:.68rem;color:var(--muted)}
+.day.sat b{color:var(--red)}
+.day.today{border-color:var(--blue);background:var(--sky)}
+.day.sel{outline:3px solid var(--red);outline-offset:1px}
+.day.ev::after{content:"";position:absolute;top:5px;right:6px;width:7px;height:7px;border-radius:50%;background:var(--red)}
+.day.blank{visibility:hidden}
+.calbar{display:grid;grid-template-columns:auto 1fr 1fr auto auto;gap:8px;align-items:center}
+@media(max-width:520px){.calbar{grid-template-columns:auto 1fr 1fr auto}.calbar #calToday{grid-column:1/-1}}
+/* calculator */
+.keys{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:12px}
+.key{min-height:52px;border-radius:12px;border:2px solid var(--line);background:var(--surface);font-weight:700;font-size:1.05rem;cursor:pointer;padding:0}
+.key.fn{font-size:.88rem;background:var(--bg)}
+.key.op{background:var(--sky);color:var(--blue)}
+.key.eq{background:var(--red);color:var(--red-ink);border-color:var(--red)}
+.key:active{transform:scale(.96)}
+#calcIn{font-size:1.5rem;text-align:right;min-height:54px;font-variant-numeric:tabular-nums}
+#calcOut{font-size:2.2rem;font-weight:800;text-align:right;min-height:2.8rem;word-break:break-all}
+.hist button{display:block;width:100%;text-align:right;background:none;border:0;border-bottom:1px solid var(--line);padding:8px 2px;cursor:pointer;color:var(--ink)}
+/* study time */
+.bars{display:flex;align-items:flex-end;gap:8px;height:150px;margin-top:10px}
+.bar{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:4px;height:100%}
+.bar i{display:block;width:100%;background:var(--blue);border-radius:8px 8px 0 0;min-height:3px}
+.bar small{font-size:.75rem;color:var(--muted)}
+.prog{height:14px;border-radius:999px;background:var(--line);overflow:hidden;margin:8px 0}
+.prog i{display:block;height:100%;background:var(--good);border-radius:999px}
+.big{font-size:2.6rem;font-weight:800;font-variant-numeric:tabular-nums;line-height:1.1}
+.msg{margin-top:12px;font-weight:600;min-height:1.4em}
+.msg.ok{color:var(--good)}.msg.err{color:var(--bad)}
+.seg{display:flex;gap:8px;margin-bottom:14px}
+.seg .chip{flex:1}
+.avatar{width:56px;height:56px;border-radius:50%;background:var(--blue);color:var(--surface);display:grid;place-items:center;font-size:1.6rem;font-weight:800;flex:0 0 auto}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .avatar{color:#10131D}}
+:root[data-theme="dark"] .avatar{color:#10131D}
+.avatar.lg{width:84px;height:84px;font-size:2.6rem}
+.avatar.em{background:var(--sky);color:inherit;font-size:1.7rem;font-weight:400}
+.avatar.lg.em{font-size:2.8rem}
+.avatar img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:block}
+.avatar.sm{width:26px;height:26px;font-size:.85rem;display:inline-grid;vertical-align:middle;margin-right:6px}
+.avatar.sm.em{font-size:1rem}
+.avgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(64px,1fr));gap:8px;margin-top:8px}
+.avgrid button{border:2px solid var(--line);background:var(--bg);border-radius:14px;min-height:64px;font-size:1.9rem;cursor:pointer;display:grid;place-items:center;padding:4px}
+.avgrid button[aria-pressed="true"]{border-color:var(--blue);box-shadow:0 0 0 2px var(--blue)}
+.avgrid button small{font-size:.7rem;font-weight:700;color:var(--muted);line-height:1}
+.mapbox{overflow-x:auto;border:2px solid var(--line);border-radius:16px;background:var(--surface);margin-top:12px}
+svg.nmap{display:block;min-width:620px;width:100%;height:auto}
+.nmap text{font-family:var(--font);paint-order:stroke;stroke:var(--surface);stroke-width:4px;stroke-linejoin:round;fill:var(--ink);font-weight:700}
+.nmap .mk{cursor:pointer}.nmap .mk:focus-visible{outline:none}.nmap .mk:focus-visible circle.vis{stroke:var(--blue);stroke-width:4}
+.mapctl{display:flex;gap:8px;align-items:center;margin-top:10px;flex-wrap:wrap}
+.fcard{min-height:190px;display:grid;place-items:center;text-align:center;font-size:1.5rem;font-weight:800;cursor:pointer;padding:20px;background:var(--surface);border:2px solid var(--line);border-radius:18px;width:100%;line-height:1.35}
+.fcard.back{background:var(--sky);border-color:var(--blue)}
+.ptg{display:grid;grid-template-columns:repeat(auto-fill,minmax(62px,1fr));gap:8px;margin-top:12px}
+.ptg button{border:2px solid var(--line);border-radius:12px;background:var(--surface);min-height:66px;cursor:pointer;padding:4px;line-height:1.1}
+.ptg button b{display:block;font-size:1.3rem}.ptg button small{color:var(--muted);font-size:.7rem}
+.ptg button[aria-pressed="true"]{border-color:var(--blue);box-shadow:0 0 0 2px var(--blue)}
+.frow{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid var(--line)}.frow code{background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:1px 8px;text-align:right}
+.stat{background:var(--bg);border:2px solid var(--line);border-radius:12px;padding:10px;text-align:center}
+.stat b{display:block;font-size:1.4rem}
+footer{padding:30px 0 50px;color:var(--muted);font-size:.95rem;border-top:2px solid var(--line)}
+:root{--bad:#C8102E}:root[data-theme="dark"]{--bad:#FF5C73}
+:root[data-palette="ocean"][data-theme="light"]{--bg:#F1F7F8;--surface:#FFFFFF;--ink:#0F2A33;--muted:#4A6670;--line:#CFE0E3;--red:#0E7490;--redink:#FFFFFF;--blue:#1D4ED8;--sky:#DDF1F5;--good:#0B7A4B;--warn:#B45309;}
+:root[data-palette="ocean"][data-theme="dark"]{--bg:#0B1A1F;--surface:#12272E;--ink:#E9F5F7;--muted:#9DBAC2;--line:#234049;--red:#4FD1E8;--redink:#0B1A1F;--blue:#93B4FF;--sky:#16363F;--good:#4DD39A;--warn:#F3B25C;}
+:root[data-palette="forest"][data-theme="light"]{--bg:#F4F6F0;--surface:#FFFFFF;--ink:#1C2A1F;--muted:#55645A;--line:#D9DFD2;--red:#1F7A3D;--redink:#FFFFFF;--blue:#14532D;--sky:#E3F1E4;--good:#0B7A4B;--warn:#B45309;}
+:root[data-palette="forest"][data-theme="dark"]{--bg:#0F1810;--surface:#17241A;--ink:#EEF5EE;--muted:#A5B8A8;--line:#2A3D2D;--red:#5FD68A;--redink:#0F1810;--blue:#9BE3B4;--sky:#1B3322;--good:#4DD39A;--warn:#F3B25C;}
+:root[data-palette="sunset"][data-theme="light"]{--bg:#FBF5EF;--surface:#FFFFFF;--ink:#2A1A12;--muted:#6B5448;--line:#E8D8CA;--red:#C2410C;--redink:#FFFFFF;--blue:#7C2D12;--sky:#FDE8D4;--good:#0B7A4B;--warn:#B45309;}
+:root[data-palette="sunset"][data-theme="dark"]{--bg:#1A110C;--surface:#271A13;--ink:#FBEFE6;--muted:#CBB3A3;--line:#4A3326;--red:#FF8A4C;--redink:#1A110C;--blue:#FFB98A;--sky:#3A2517;--good:#4DD39A;--warn:#F3B25C;}
+:root[data-palette="royal"][data-theme="light"]{--bg:#F6F4FB;--surface:#FFFFFF;--ink:#1F1A33;--muted:#5E5877;--line:#DDD8EC;--red:#6D28D9;--redink:#FFFFFF;--blue:#4338CA;--sky:#E9E4FB;--good:#0B7A4B;--warn:#B45309;}
+:root[data-palette="royal"][data-theme="dark"]{--bg:#14111F;--surface:#1E1930;--ink:#F2EFFB;--muted:#B3ABCF;--line:#352E52;--red:#B794FF;--redink:#14111F;--blue:#A5B4FC;--sky:#2A2348;--good:#4DD39A;--warn:#F3B25C;}
+:root[data-palette="contrast"][data-theme="light"]{--bg:#FFFFFF;--surface:#FFFFFF;--ink:#000000;--muted:#222222;--line:#000000;--red:#000000;--redink:#FFFFFF;--blue:#0000CC;--sky:#FFF7B3;--good:#006400;--warn:#8A3B00;}
+:root[data-palette="contrast"][data-theme="dark"]{--bg:#000000;--surface:#000000;--ink:#FFFFFF;--muted:#E6E6E6;--line:#FFFFFF;--red:#FFE600;--redink:#000000;--blue:#7FDBFF;--sky:#1A1A00;--good:#6BFF9E;--warn:#FFB340;}
+:root[data-palette="rose"][data-theme="light"]{--bg:#FBF4F7;--surface:#FFFFFF;--ink:#2A1420;--muted:#6E5361;--line:#EBD5DF;--red:#BE185D;--redink:#FFFFFF;--blue:#9D174D;--sky:#FCE7F1;--good:#0B7A4B;--warn:#B45309;}
+:root[data-palette="rose"][data-theme="dark"]{--bg:#1A0F15;--surface:#27161F;--ink:#FBEFF4;--muted:#CDB1BF;--line:#4A2A3B;--red:#FF7AB6;--redink:#1A0F15;--blue:#F9A8D4;--sky:#3A1A2B;--good:#4DD39A;--warn:#F3B25C;}
+:root[data-palette="gold"][data-theme="light"]{--bg:#FBF8EE;--surface:#FFFFFF;--ink:#2B2410;--muted:#6B5F3A;--line:#EADFB9;--red:#A16207;--redink:#FFFFFF;--blue:#854D0E;--sky:#FEF3C7;--good:#0B7A4B;--warn:#B45309;}
+:root[data-palette="gold"][data-theme="dark"]{--bg:#17140A;--surface:#241F10;--ink:#FAF4DC;--muted:#CFC39A;--line:#463C1A;--red:#FBBF24;--redink:#17140A;--blue:#FDE68A;--sky:#33290F;--good:#4DD39A;--warn:#F3B25C;}
+:root[data-palette="mint"][data-theme="light"]{--bg:#F1F8F6;--surface:#FFFFFF;--ink:#10302C;--muted:#4B6A66;--line:#CCE3DF;--red:#0F766E;--redink:#FFFFFF;--blue:#115E59;--sky:#D9F5F0;--good:#0B7A4B;--warn:#B45309;}
+:root[data-palette="mint"][data-theme="dark"]{--bg:#0B1716;--surface:#12241F;--ink:#E8F7F4;--muted:#9CC0BA;--line:#1F3F3B;--red:#5EEAD4;--redink:#0B1716;--blue:#99F6E4;--sky:#12302D;--good:#4DD39A;--warn:#F3B25C;}
+:root[data-palette="slate"][data-theme="light"]{--bg:#F5F6F8;--surface:#FFFFFF;--ink:#0F172A;--muted:#556070;--line:#D5DAE2;--red:#334155;--redink:#FFFFFF;--blue:#1E293B;--sky:#E2E8F0;--good:#0B7A4B;--warn:#B45309;}
+:root[data-palette="slate"][data-theme="dark"]{--bg:#0F131A;--surface:#181E29;--ink:#F1F5F9;--muted:#A3AFC2;--line:#2B3444;--red:#CBD5E1;--redink:#0F131A;--blue:#E2E8F0;--sky:#1E293B;--good:#4DD39A;--warn:#F3B25C;}
+.tpanel{position:fixed;top:calc(env(safe-area-inset-top,0px) + 60px);right:12px;width:min(340px,calc(100% - 24px));max-height:calc(100% - 90px);overflow:auto;z-index:20;background:var(--surface);border:2px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 12px 40px rgba(0,0,0,.25)}
+.tpanel[hidden]{display:none}.tpanel h3{font-size:1rem;margin:14px 0 8px}.tpanel h3:first-child{margin-top:0}
+.pal{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.pal button{display:flex;align-items:center;gap:8px;border:2px solid var(--line);background:var(--bg);border-radius:12px;padding:8px;cursor:pointer;min-height:48px;font-weight:600;text-align:left}
+.pal button[aria-pressed="true"]{border-color:var(--blue);box-shadow:0 0 0 2px var(--blue)}
+.sw{width:26px;height:26px;border-radius:50%;flex:0 0 auto;border:2px solid var(--line)}
+.tpanel .seg{margin-bottom:0;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div class="brand"><i aria-hidden="true"></i><span data-i18n="brand">Edu Nova</span></div>
+    <div class="ctl">
+      <button class="btn ghost sm" id="acctBtn" type="button" aria-label="Account"></button>
+      <button class="btn ghost sm" id="langBtn" type="button" aria-label="Change language">English</button>
+      <button class="btn ghost sm" id="themeBtn" type="button" aria-label="Themes" aria-haspopup="dialog" aria-expanded="false">🎨</button>
+    </div>
+  </div>
+</div>
+
+<div class="tpanel" id="themePanel" role="dialog" aria-label="Themes" hidden></div>
+
+<nav class="tabs" aria-label="Main">
+  <div class="wrap" role="tablist">
+    <button class="tab" role="tab" data-view="home" aria-selected="true" data-i18n="t_home">गृहपृष्ठ</button>
+    <button class="tab" role="tab" data-view="notes" aria-selected="false" data-i18n="t_notes">नोट्स</button>
+    <button class="tab" role="tab" data-view="gpa" aria-selected="false" data-i18n="t_gpa">जीपीए क्यालकुलेटर</button>
+    <button class="tab" role="tab" data-view="quiz" aria-selected="false" data-i18n="t_quiz">अभ्यास क्विज</button>
+    <button class="tab" role="tab" data-view="tools" aria-selected="false" data-i18n="t_tools">अध्ययन उपकरण</button>
+    <button class="tab" role="tab" data-view="cal" aria-selected="false" data-i18n="t_cal">पात्रो</button>
+    <button class="tab" role="tab" data-view="calc" aria-selected="false" data-i18n="t_calc">वैज्ञानिक क्यालकुलेटर</button>
+    <button class="tab" role="tab" data-view="time" aria-selected="false" data-i18n="t_time">अध्ययन समय</button>
+    <button class="tab" role="tab" data-view="map" aria-selected="false" data-i18n="t_map">नेपाल नक्सा</button>
+    <button class="tab" role="tab" data-view="learn" aria-selected="false" data-i18n="t_learn">सिकाइ सामग्री</button>
+    <button class="tab" role="tab" data-view="career" aria-selected="false" data-i18n="t_career">करियर र छात्रवृत्ति</button>
+    <button class="tab" role="tab" data-view="about" aria-selected="false" data-i18n="t_about">बारेमा</button>
+  </div>
+</nav>
+
+<!-- HOME -->
+<main>
+<section class="view on" id="v-home">
+  <div class="hero">
+    <div class="wrap"><div class="in">
+      <p id="greet" style="font-weight:800;font-size:1.25rem;margin:0 0 6px"></p>
+      <h1 data-i18n="h_title">नेपालका हरेक विद्यार्थीका लागि निःशुल्क शिक्षा</h1>
+      <p class="lead" data-i18n="h_lead">नोट्स, जीपीए क्यालकुलेटर र अध्ययन उपकरण: एकै ठाउँमा, हल्का र निःशुल्क।</p>
+      <p id="todayBs" style="font-weight:600;margin:-10px 0 18px"></p>
+      <div class="cta">
+        <button class="btn" data-go="notes" data-i18n="h_c1">नोट्स हेर्नुहोस्</button>
+        <button class="btn ghost" data-go="gpa" data-i18n="h_c2">जीपीए निकाल्नुहोस्</button>
+        <button class="btn ghost" data-go="account" id="heroAcct"></button>
+      </div>
+    </div></div>
+    <svg viewBox="0 0 1000 150" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0 150 L0 100 L90 60 L150 90 L260 20 L330 75 L420 40 L520 95 L620 10 L700 70 L790 35 L880 85 L1000 50 L1000 150Z" fill="#fff" opacity=".7"/>
+      <path d="M0 150 L0 120 L120 85 L210 110 L330 70 L450 112 L560 78 L690 115 L800 82 L910 112 L1000 90 L1000 150Z" fill="var(--blue)" opacity=".85"/>
+      <path d="M0 150 L0 138 L160 118 L330 135 L520 120 L720 138 L880 122 L1000 135 L1000 150Z" fill="var(--red)"/>
+    </svg>
+  </div>
+  <div class="wrap">
+    <div class="sec">
+      <h2 data-i18n="p_title">नेपालका शिक्षा समस्या र हाम्रो समाधान</h2>
+      <p class="muted" data-i18n="p_sub">एउटा वेबसाइटले सबै समस्या समाधान गर्न सक्दैन, तर यी कुरामा मद्दत गर्छ।</p>
+      <div class="grid c2" id="problems"></div>
+    </div>
+    <div class="sec">
+      <h2 data-i18n="q_title">छिटो सुरु गर्नुहोस्</h2>
+      <div class="grid c3">
+        <div class="card"><h3 data-i18n="q1">नोट्स</h3><p class="muted" data-i18n="q1d">कक्षा ८–१२ का विषयगत सारांश नोट्स र आफ्नै नोट्स।</p><p style="margin-top:10px"><button class="btn sm" data-go="notes" data-i18n="open">खोल्नुहोस्</button></p></div>
+        <div class="card"><h3 data-i18n="q2">NEB जीपीए</h3><p class="muted" data-i18n="q2d">कक्षा ११ र १२ को ग्रेड पोइन्ट र जीपीए निकाल्नुहोस्।</p><p style="margin-top:10px"><button class="btn sm" data-go="gpa" data-i18n="open">खोल्नुहोस्</button></p></div>
+        <div class="card"><h3 data-i18n="q3">अध्ययन उपकरण</h3><p class="muted" data-i18n="q3d">टाइमर, परीक्षा काउन्टडाउन र कार्यसूची।</p><p style="margin-top:10px"><button class="btn sm" data-go="tools" data-i18n="open">खोल्नुहोस्</button></p></div>
+        <div class="card"><h3 data-i18n="t_quiz"></h3><p class="muted" data-i18n="q4d"></p><p style="margin-top:10px"><button class="btn sm" data-go="quiz" data-i18n="open">खोल्नुहोस्</button></p></div>
+        <div class="card"><h3 data-i18n="t_cal"></h3><p class="muted" data-i18n="q5d"></p><p style="margin-top:10px"><button class="btn sm" data-go="cal" data-i18n="open">खोल्नुहोस्</button></p></div>
+        <div class="card"><h3 data-i18n="t_calc"></h3><p class="muted" data-i18n="q6d"></p><p style="margin-top:10px"><button class="btn sm" data-go="calc" data-i18n="open">खोल्नुहोस्</button></p></div>
+        <div class="card"><h3 data-i18n="t_time"></h3><p class="muted" data-i18n="q7d"></p><p style="margin-top:10px"><button class="btn sm" data-go="time" data-i18n="open">खोल्नुहोस्</button></p></div>
+        <div class="card"><h3 data-i18n="t_career"></h3><p class="muted" data-i18n="q8d"></p><p style="margin-top:10px"><button class="btn sm" data-go="career" data-i18n="open">खोल्नुहोस्</button></p></div>
+        <div class="card"><h3 data-i18n="t_map"></h3><p class="muted" data-i18n="q9d"></p><p style="margin-top:10px"><button class="btn sm" data-go="map" data-i18n="open">खोल्नुहोस्</button></p></div>
+        <div class="card"><h3 data-i18n="t_learn"></h3><p class="muted" data-i18n="q10d"></p><p style="margin-top:10px"><button class="btn sm" data-go="learn" data-i18n="open">खोल्नुहोस्</button></p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NOTES -->
+<section class="view" id="v-notes">
+  <div class="wrap">
+    <h2 data-i18n="n_title">विषयगत नोट्स</h2>
+    <p class="muted" data-i18n="n_sub">सारांश नोट्स। आफ्नो पाठ्यपुस्तक र शिक्षकको नोटसँग मिलाएर पढ्नुहोस्।</p>
+    <div class="chips" id="subjChips" role="group" aria-label="Subjects"></div>
+    <label class="muted" for="search" data-i18n="search">खोज्नुहोस्</label>
+    <input id="search" type="search" placeholder="Newton, मोल, equation...">
+    <div id="notesList" style="margin-top:16px"></div>
+
+    <div class="sec">
+      <h2 data-i18n="my_title">मेरा नोट्स</h2>
+      <p class="muted" data-i18n="my_sub">यो तपाईंको फोनमै सेभ हुन्छ। इन्टरनेटबिना पनि पछि हेर्न सकिन्छ।</p>
+      <div class="card" style="margin-top:14px">
+        <label for="mnTitle" class="muted">Title</label>
+        <input id="mnTitle" maxlength="80">
+        <label for="mnText" class="muted" style="margin-top:10px;display:block">Note</label>
+        <textarea id="mnText" rows="4"></textarea>
+        <p style="margin-top:12px"><button class="btn" id="mnAdd" type="button" data-i18n="save">सेभ गर्नुहोस्</button></p>
+      </div>
+      <div id="myNotes" style="margin-top:14px"></div>
+    </div>
+  </div>
+</section>
+
+<!-- GPA -->
+<section class="view" id="v-gpa">
+  <div class="wrap">
+    <h2 data-i18n="g_title">NEB जीपीए क्यालकुलेटर</h2>
+    <p class="muted" data-i18n="g_sub">कक्षा ११ र १२ का लागि। सैद्धान्तिक (७५) र आन्तरिक/प्रयोगात्मक (२५) अङ्क राख्नुहोस्।</p>
+    <div class="chips" id="streamChips" role="group" aria-label="Stream"></div>
+    <div class="gtable" id="gRows"></div>
+    <p style="margin-top:12px" class="row">
+      <button class="btn ghost" id="gAdd" type="button" data-i18n="g_add">विषय थप्नुहोस्</button>
+      <button class="btn ghost" id="gClear" type="button" data-i18n="g_clear">अङ्क खाली गर्नुहोस्</button>
+    </p>
+    <div class="total" aria-live="polite">
+      <div><span data-i18n="g_gpa">जीपीए</span><br><big id="gGpa">–</big></div>
+      <div><span data-i18n="g_cr">कुल क्रेडिट आवर</span><br><b id="gCr">0</b></div>
+      <div><span data-i18n="g_pct">अनुमानित प्रतिशत</span><br><b id="gPct">–</b></div>
+      <div id="gStatus" style="flex-basis:100%"></div>
+    </div>
+    <div class="note-box" id="seeNote" hidden></div>
+    <div class="note-box" data-i18n="g_note">जीपीए = Σ(क्रेडिट आवर × ग्रेड पोइन्ट) ÷ कुल क्रेडिट आवर। अनुमानित प्रतिशत = जीपीए × २५ (विश्वविद्यालयअनुसार फरक हुन सक्छ)। उत्तीर्ण नियम र क्रेडिट आवर परिवर्तन हुन सक्छन्, NEB को पछिल्लो सूचना हेर्नुहोस्।</div>
+    <div class="sec">
+      <h3 data-i18n="g_scale">NEB ग्रेड तालिका</h3>
+      <div class="card scroll" style="margin-top:10px"><table id="scale"></table></div>
+    </div>
+  </div>
+</section>
+
+<!-- TOOLS -->
+<section class="view" id="v-tools">
+  <div class="wrap">
+    <h2 data-i18n="tl_title">अध्ययन उपकरण</h2>
+    <div class="grid c2">
+      <div class="card">
+        <h3 data-i18n="tm">पढाइ टाइमर</h3>
+        <div class="timer" id="tmShow" aria-live="off">25:00</div>
+        <div class="row" style="margin:8px 0">
+          <button class="btn sm" id="tmStart" type="button" data-i18n="start">सुरु</button>
+          <button class="btn ghost sm" id="tmReset" type="button" data-i18n="reset">रिसेट</button>
+        </div>
+        <div class="row">
+          <button class="chip" data-min="25" aria-pressed="true">25 min</button>
+          <button class="chip" data-min="45" aria-pressed="false">45 min</button>
+          <button class="chip" data-min="5" aria-pressed="false">Break 5</button>
+        </div>
+        <p class="muted" id="tmMsg" style="margin-top:8px"></p>
+      </div>
+      <div class="card">
+        <h3 data-i18n="ex">परीक्षा काउन्टडाउन</h3>
+        <label for="exName" class="muted">Exam</label>
+        <input id="exName" placeholder="NEB Class 12">
+        <label for="exDate" class="muted" style="display:block;margin-top:8px">Date</label>
+        <input id="exDate" type="date">
+        <p style="margin-top:12px;font-size:1.6rem;font-weight:800" id="exOut" aria-live="polite"></p>
+      </div>
+    </div>
+    <div class="card" style="margin-top:14px">
+      <h3 data-i18n="td">आजको कार्यसूची</h3>
+      <div class="row" style="margin:10px 0">
+        <input id="tdText" style="flex:1;min-width:0" placeholder="Physics chapter 3">
+        <button class="btn" id="tdAdd" type="button" data-i18n="add">थप्नुहोस्</button>
+      </div>
+      <div id="tdList"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="view" id="v-about">
+  <div class="wrap">
+    <h2 data-i18n="a_title">यो वेबसाइटको बारेमा</h2>
+    <div class="card" style="margin-top:14px">
+      <p data-i18n="a_p1">यो एउटा नमुना शैक्षिक वेबसाइट हो, सबै विद्यार्थीलाई निःशुल्क पहुँच दिन बनाइएको।</p>
+      <p style="margin-top:10px" data-i18n="a_p2">नोट्स सारांश मात्र हुन्। परीक्षा तयारीका लागि आफ्नो पाठ्यक्रम र शिक्षकको मार्गदर्शन अनुसार पढ्नुहोस्। आधिकारिक नतिजा र सूचना NEB को वेबसाइट (neb.gov.np) मा हेर्नुहोस्।</p>
+      <p style="margin-top:10px" data-i18n="a_p3">तपाईंले राखेको डाटा (नोट्स, कार्यसूची, अङ्क) यही फोन/ब्राउजरमा मात्र बस्छ, कतै पठाइँदैन।</p>
+    </div>
+  </div>
+</section>
+
+<!-- QUIZ -->
+<section class="view" id="v-quiz">
+  <div class="wrap">
+    <h2 data-i18n="z_title">अभ्यास क्विज</h2>
+    <p class="muted" data-i18n="z_sub">नोट्सका आधारमा १८ वटा छोटा प्रश्न। हरेक उत्तरपछि व्याख्या देखिन्छ।</p>
+    <div class="card" style="margin-top:16px" id="qBox" aria-live="polite"></div>
+  </div>
+</section>
+
+<!-- CAREER -->
+<section class="view" id="v-career">
+  <div class="wrap">
+    <h2 data-i18n="c_title">करियर र छात्रवृत्ति गाइड</h2>
+    <p class="muted" data-i18n="c_sub">पढाइपछि के गर्ने भन्ने सामान्य मार्गदर्शन। भर्ना र आवेदनको मिति तथा नियम सम्बन्धित निकायको सूचनामा पक्का गर्नुहोस्।</p>
+    <div class="grid c2" id="careerCards"></div>
+    <div class="sec">
+      <h2 data-i18n="s_title">छात्रवृत्ति आवेदन चेकलिस्ट</h2>
+      <p class="muted" data-i18n="s_sub">आवश्यक कागजात तयार भए टिक लगाउनुहोस्। यो तपाईंको फोनमै सेभ हुन्छ।</p>
+      <div class="card" style="margin-top:14px" id="schList"></div>
+      <div class="note-box" data-i18n="s_note">छात्रवृत्तिको सूचना स्कुल/कलेजको नोटिस बोर्ड, विश्वविद्यालय, शिक्षा, विज्ञान तथा प्रविधि मन्त्रालय र स्थानीय तह (वडा/नगरपालिका) बाट हेर्नुहोस्। कुनै पनि आवेदनका लागि पैसा माग्नेहरूबाट सावधान रहनुहोस्।</div>
+    </div>
+    <div class="sec">
+      <h2 data-i18n="o_title">पुराना प्रश्नपत्र कहाँ पाउने?</h2>
+      <div class="card" style="margin-top:12px"><p data-i18n="o_p">आधिकारिक नमुना प्रश्न, पाठ्यक्रम र नतिजा NEB को वेबसाइट (neb.gov.np) मा हेर्नुहोस्। आफ्नो स्कुल/कलेजका शिक्षकसँग पनि पुराना प्रश्नपत्र माग्न सकिन्छ।</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CALENDAR -->
+<section class="view" id="v-cal">
+  <div class="wrap">
+    <h2 data-i18n="cl_title">नेपाली पात्रो (बिक्रम सम्वत्)</h2>
+    <p class="muted" data-i18n="cl_sub">मिति थिचेर पढाइका कार्यक्रम (परीक्षा, गृहकार्य) थप्नुहोस्। शनिबार साप्ताहिक बिदा हो।</p>
+    <div class="card" style="margin-top:14px">
+      <div class="calbar">
+        <button class="btn ghost sm" id="calPrev" type="button" aria-label="Previous month">‹</button>
+        <select id="calM" aria-label="Month"></select>
+        <select id="calY" aria-label="Year"></select>
+        <button class="btn ghost sm" id="calNext" type="button" aria-label="Next month">›</button>
+        <button class="btn sm" id="calToday" type="button" data-i18n="cl_today">आज</button>
+      </div>
+      <p class="muted" id="calAd" style="margin-top:8px;font-size:.95rem"></p>
+      <div class="cal" id="calGrid"></div>
+    </div>
+    <div class="card" style="margin-top:14px" id="calSel"></div>
+    <div class="card" style="margin-top:14px">
+      <h3 data-i18n="cv_title">मिति परिवर्तक</h3>
+      <div class="grid c2">
+        <div>
+          <label class="muted" for="cvAd" data-i18n="cv_ad">अंग्रेजी मिति (AD)</label>
+          <input id="cvAd" type="date">
+          <p style="margin-top:8px;font-weight:700" id="cvAdOut" aria-live="polite"></p>
+        </div>
+        <div>
+          <label class="muted" data-i18n="cv_bs">बिक्रम सम्वत् (BS): वर्ष / महिना / गते</label>
+          <div class="row" style="flex-wrap:nowrap">
+            <input id="cvY" type="number" inputmode="numeric" placeholder="2083" aria-label="BS year">
+            <input id="cvM" type="number" inputmode="numeric" min="1" max="12" placeholder="6" aria-label="BS month">
+            <input id="cvD" type="number" inputmode="numeric" min="1" max="32" placeholder="16" aria-label="BS day">
+          </div>
+          <p style="margin-top:8px;font-weight:700" id="cvBsOut" aria-live="polite"></p>
+        </div>
+      </div>
+      <div class="note-box" data-i18n="cl_note">यो पात्रो २०७४ देखि २०९० साल सम्मको प्रकाशित तालिकामा आधारित छ। आधिकारिक बिदा र पर्वका लागि सरकारी पात्रो हेर्नुहोस्।</div>
+    </div>
+  </div>
+</section>
+
+<!-- SCIENTIFIC CALCULATOR -->
+<section class="view" id="v-calc">
+  <div class="wrap" style="max-width:560px">
+    <h2 data-i18n="sc_title">वैज्ञानिक क्यालकुलेटर</h2>
+    <div class="card" style="margin-top:14px">
+      <div class="row" style="justify-content:space-between;margin-bottom:8px">
+        <button class="btn ghost sm" id="degBtn" type="button" aria-live="polite">DEG</button>
+        <span class="muted" id="ansShow" style="font-size:.95rem"></span>
+      </div>
+      <input id="calcIn" inputmode="none" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Expression" placeholder="sin(30) + 2^3">
+      <div id="calcOut" aria-live="polite">0</div>
+      <div class="keys" id="keys"></div>
+    </div>
+    <div class="card hist" style="margin-top:14px">
+      <h3 data-i18n="sc_hist">हालका गणना</h3>
+      <div id="calcHist"></div>
+    </div>
+  </div>
+</section>
+
+<!-- STUDY TIME -->
+<section class="view" id="v-time">
+  <div class="wrap">
+    <h2 data-i18n="st_title">अध्ययन समय ट्र्याकर</h2>
+    <p class="muted" data-i18n="st_sub">कति घण्टा पढ्यो भनेर विषयअनुसार लेखाजोखा राख्नुहोस्। पेज बन्द गरे पनि स्टपवाच चलिरहन्छ।</p>
+    <div class="grid c2">
+      <div class="card">
+        <label class="muted" for="stSubj" data-i18n="st_subj">विषय</label>
+        <select id="stSubj"></select>
+        <div class="big" id="swShow" style="margin:14px 0" aria-live="off">00:00:00</div>
+        <div class="row">
+          <button class="btn" id="swBtn" type="button" data-i18n="start">सुरु</button>
+        </div>
+        <hr style="border:0;border-top:1px solid var(--line);margin:16px 0">
+        <label class="muted" for="stMin" data-i18n="st_manual">मिनेट हातले थप्नुहोस्</label>
+        <div class="row" style="flex-wrap:nowrap">
+          <input id="stMin" type="number" inputmode="numeric" min="1" max="600" placeholder="30">
+          <button class="btn ghost" id="stAdd" type="button" data-i18n="add">थप्नुहोस्</button>
+        </div>
+      </div>
+      <div class="card">
+        <h3 data-i18n="st_today">आजको अध्ययन</h3>
+        <div class="big" id="stTotal">0m</div>
+        <div class="prog" role="progressbar" aria-valuemin="0" aria-valuemax="100" id="stProg"><i style="width:0%"></i></div>
+        <div class="row" style="flex-wrap:nowrap">
+          <label for="stGoal" class="muted" style="white-space:nowrap" data-i18n="st_goal">दैनिक लक्ष्य (मिनेट)</label>
+          <input id="stGoal" type="number" inputmode="numeric" min="10" max="900">
+        </div>
+        <p class="muted" id="stMsg" style="margin-top:10px"></p>
+        <p style="margin-top:8px"><b id="stStreak"></b></p>
+      </div>
+    </div>
+    <div class="grid c2">
+      <div class="card"><h3 data-i18n="st_week">पछिल्ला ७ दिन</h3><div class="bars" id="stBars"></div></div>
+      <div class="card"><h3 data-i18n="st_by">यो हप्ताको विषयअनुसार समय</h3><div id="stBy" style="margin-top:8px"></div>
+        <p style="margin-top:12px"><button class="btn ghost sm" id="stClear" type="button" data-i18n="st_clear">लग खाली गर्नुहोस्</button></p></div>
+    </div>
+  </div>
+</section>
+
+<!-- MAP -->
+<section class="view" id="v-map">
+  <div class="wrap">
+    <h2 data-i18n="m_title">नेपालको नक्सा</h2>
+    <p class="muted" data-i18n="m_sub">७ किसिमका नक्सा: प्रदेश, नदी, ताल, मन्दिर, हिमाल, निकुञ्ज र सहर। चिन्हमा थिच्नुहोस्।</p>
+    <div class="chips" id="mapTabs" role="group" aria-label="Map type"></div>
+    <div class="mapbox"><div id="mapSvg"></div></div>
+    <div class="mapctl">
+      <button class="btn ghost sm" id="mZin" type="button" aria-label="Zoom in">＋</button>
+      <button class="btn ghost sm" id="mZout" type="button" aria-label="Zoom out">－</button>
+      <button class="btn ghost sm" id="mZreset" type="button" data-i18n="m_reset">रिसेट</button>
+      <span class="muted" id="mZlab"></span>
+    </div>
+    <div class="card" style="margin-top:12px" id="mapInfo" aria-live="polite"></div>
+    <div class="chips" id="mapList" role="group" aria-label="Places"></div>
+    <div class="note-box" data-i18n="m_note">यो सरल नक्सा हो। सिमाना र स्थान लगभग मात्र हुन्, यात्रा वा आधिकारिक प्रयोगका लागि होइन।</div>
+  </div>
+</section>
+
+<!-- LEARN -->
+<section class="view" id="v-learn">
+  <div class="wrap">
+    <h2 data-i18n="l_title">सिकाइ सामग्री</h2>
+    <p class="muted" data-i18n="l_sub">फ्ल्यासकार्ड, तत्व, सूत्र, शब्दावली र एकाइ परिवर्तक: छिटो दोहोर्याउन।</p>
+    <div class="chips" id="lnTabs" role="group" aria-label="Learn tools"></div>
+    <div id="lnBody"></div>
+  </div>
+</section>
+
+<!-- ACCOUNT -->
+<section class="view" id="v-account">
+  <div class="wrap" style="max-width:560px">
+    <h2 id="acTitle"></h2>
+    <p class="muted" id="acSub" style="margin-top:6px"></p>
+    <div id="acBox" style="margin-top:16px"></div>
+  </div>
+</section>
+</main>
+
+<div class="wrap"><footer>© Edu Nova. <span data-i18n="foot">नमुना सामग्री: आफ्नै विवरणले बदल्नुहोस्।</span></footer></div>
+
+<script>
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const GLOBAL_KEYS=["lang","theme","palette","fsize","customCol","users","session"];
+let uid=null;
+const kn=k=>GLOBAL_KEYS.includes(k)?"efa:"+k:"efa:u:"+(uid||"guest")+":"+k;
+const store={
+  get(k,d){try{const v=localStorage.getItem(kn(k));return v?JSON.parse(v):d}catch(e){return d}},
+  set(k,v){try{localStorage.setItem(kn(k),JSON.stringify(v))}catch(e){}}
+};
+uid=store.get("session",null);
+if(uid&&!store.get("users",{})[uid])uid=null;
+
+/* ---------- i18n ---------- */
+const NE={
+ t_learn:"सिकाइ सामग्री",l_title:"सिकाइ सामग्री",l_sub:"अंग्रेजी र नेपाली व्याकरण, गणितका सबै सूत्र, फ्ल्यासकार्ड, तत्व, शब्दावली र एकाइ परिवर्तक।",q10d:"फ्ल्यासकार्ड, तत्वहरू, सूत्र, शब्दावली र एकाइ परिवर्तक।",
+ t_map:"नेपाल नक्सा",m_title:"नेपालको नक्सा",m_sub:"७ किसिमका नक्सा: प्रदेश, नदी, ताल, मन्दिर, हिमाल, निकुञ्ज र सहर। चिन्हमा थिच्नुहोस्।",m_reset:"रिसेट",m_note:"यो सरल नक्सा हो। सिमाना र स्थान लगभग मात्र हुन्, यात्रा वा आधिकारिक प्रयोगका लागि होइन।",q9d:"प्रदेश, नदी, ताल, मन्दिर, हिमाल, निकुञ्ज र सहरका ७ नक्सा।",
+ q4d:"१८ वटा छोटा प्रश्न, हरेकको व्याख्यासहित।",q5d:"बिक्रम सम्वत् पात्रो, मिति परिवर्तक र पढाइका कार्यक्रम।",q6d:"सिन, कस, लग र वर्गमूल सहितको क्यालकुलेटर।",q7d:"स्टपवाचले विषयअनुसार पढेको समय र दैनिक लक्ष्य ट्र्याक गर्छ।",q8d:"पढाइपछिका बाटा र छात्रवृत्ति चेकलिस्ट।",
+ brand:"Edu Nova",t_home:"गृहपृष्ठ",t_notes:"नोट्स",t_gpa:"जीपीए क्यालकुलेटर",t_tools:"अध्ययन उपकरण",t_about:"बारेमा",
+ h_title:"नेपालका हरेक विद्यार्थीका लागि निःशुल्क शिक्षा",h_lead:"नोट्स, जीपीए क्यालकुलेटर र अध्ययन उपकरण: एकै ठाउँमा, हल्का र निःशुल्क।",
+ h_c1:"नोट्स हेर्नुहोस्",h_c2:"जीपीए निकाल्नुहोस्",p_title:"नेपालका शिक्षा समस्या र हाम्रो समाधान",p_sub:"एउटा वेबसाइटले सबै समस्या समाधान गर्न सक्दैन, तर यी कुरामा मद्दत गर्छ।",
+ q_title:"छिटो सुरु गर्नुहोस्",q1:"नोट्स",q1d:"कक्षा ८–१२ का विषयगत सारांश नोट्स र आफ्नै नोट्स।",q2:"NEB जीपीए",q2d:"कक्षा ११ र १२ को ग्रेड पोइन्ट र जीपीए निकाल्नुहोस्।",q3:"अध्ययन उपकरण",q3d:"टाइमर, परीक्षा काउन्टडाउन र कार्यसूची।",open:"खोल्नुहोस्",
+ n_title:"विषयगत नोट्स",n_sub:"सारांश नोट्स। आफ्नो पाठ्यपुस्तक र शिक्षकको नोटसँग मिलाएर पढ्नुहोस्।",search:"खोज्नुहोस्",my_title:"मेरा नोट्स",my_sub:"यो तपाईंको फोनमै सेभ हुन्छ। इन्टरनेटबिना पनि पछि हेर्न सकिन्छ।",save:"सेभ गर्नुहोस्",
+ g_title:"NEB जीपीए क्यालकुलेटर",g_sub:"SEE (कक्षा १०), ११ र १२ का लागि। सैद्धान्तिक (७५) र आन्तरिक/प्रयोगात्मक (२५) अङ्क राख्नुहोस्।",g_add:"विषय थप्नुहोस्",g_clear:"अङ्क खाली गर्नुहोस्",g_gpa:"जीपीए",g_cr:"कुल क्रेडिट आवर",g_pct:"अनुमानित प्रतिशत",
+ g_note:"जीपीए = Σ(क्रेडिट आवर × ग्रेड पोइन्ट) ÷ कुल क्रेडिट आवर। अनुमानित प्रतिशत = जीपीए × २५ (विश्वविद्यालयअनुसार फरक हुन सक्छ)। उत्तीर्ण नियम र क्रेडिट आवर परिवर्तन हुन सक्छन्, NEB को पछिल्लो सूचना हेर्नुहोस्।",g_scale:"NEB ग्रेड तालिका",
+ tl_title:"अध्ययन उपकरण",tm:"पढाइ टाइमर",start:"सुरु",reset:"रिसेट",ex:"परीक्षा काउन्टडाउन",td:"आजको कार्यसूची",add:"थप्नुहोस्",
+ a_title:"यो वेबसाइटको बारेमा",a_p1:"यो एउटा नमुना शैक्षिक वेबसाइट हो, सबै विद्यार्थीलाई निःशुल्क पहुँच दिन बनाइएको।",
+ a_p2:"नोट्स सारांश मात्र हुन्। परीक्षा तयारीका लागि आफ्नो पाठ्यक्रम र शिक्षकको मार्गदर्शन अनुसार पढ्नुहोस्। आधिकारिक नतिजा र सूचना NEB को वेबसाइट (neb.gov.np) मा हेर्नुहोस्।",
+ a_p3:"तपाईंले राखेको डाटा (नोट्स, कार्यसूची, अङ्क) यही फोन/ब्राउजरमा मात्र बस्छ, कतै पठाइँदैन।",foot:"नमुना सामग्री: आफ्नै विवरणले बदल्नुहोस्।",
+ t_quiz:"अभ्यास क्विज",t_career:"करियर र छात्रवृत्ति",z_title:"अभ्यास क्विज",z_sub:"नोट्सका आधारमा १२ वटा छोटा प्रश्न। हरेक उत्तरपछि व्याख्या देखिन्छ।",
+ c_title:"करियर र छात्रवृत्ति गाइड",c_sub:"पढाइपछि के गर्ने भन्ने सामान्य मार्गदर्शन। भर्ना र आवेदनको मिति तथा नियम सम्बन्धित निकायको सूचनामा पक्का गर्नुहोस्।",
+ s_title:"छात्रवृत्ति आवेदन चेकलिस्ट",s_sub:"आवश्यक कागजात तयार भए टिक लगाउनुहोस्। यो तपाईंको फोनमै सेभ हुन्छ।",
+ s_note:"छात्रवृत्तिको सूचना स्कुल/कलेजको नोटिस बोर्ड, विश्वविद्यालय, शिक्षा, विज्ञान तथा प्रविधि मन्त्रालय र स्थानीय तह (वडा/नगरपालिका) बाट हेर्नुहोस्। कुनै पनि आवेदनका लागि पैसा माग्नेहरूबाट सावधान रहनुहोस्।",
+ o_title:"पुराना प्रश्नपत्र कहाँ पाउने?",o_p:"आधिकारिक नमुना प्रश्न, पाठ्यक्रम र नतिजा NEB को वेबसाइट (neb.gov.np) मा हेर्नुहोस्। आफ्नो स्कुल/कलेजका शिक्षकसँग पनि पुराना प्रश्नपत्र माग्न सकिन्छ।",
+ t_cal:"पात्रो",t_calc:"वैज्ञानिक क्यालकुलेटर",t_time:"अध्ययन समय",
+ cl_title:"नेपाली पात्रो (बिक्रम सम्वत्)",cl_sub:"मिति थिचेर पढाइका कार्यक्रम (परीक्षा, गृहकार्य) थप्नुहोस्। शनिबार साप्ताहिक बिदा हो।",cl_today:"आज",cv_title:"मिति परिवर्तक",cv_ad:"अंग्रेजी मिति (AD)",cv_bs:"बिक्रम सम्वत् (BS): वर्ष / महिना / गते",
+ cl_note:"यो पात्रो २०७४ देखि २०९० साल सम्मको प्रकाशित तालिकामा आधारित छ। आधिकारिक बिदा र पर्वका लागि सरकारी पात्रो हेर्नुहोस्।",
+ sc_title:"वैज्ञानिक क्यालकुलेटर",sc_hist:"हालका गणना",
+ st_title:"अध्ययन समय ट्र्याकर",st_sub:"कति घण्टा पढ्यो भनेर विषयअनुसार लेखाजोखा राख्नुहोस्। पेज बन्द गरे पनि स्टपवाच चलिरहन्छ।",st_subj:"विषय",st_manual:"मिनेट हातले थप्नुहोस्",st_today:"आजको अध्ययन",st_goal:"दैनिक लक्ष्य (मिनेट)",st_week:"पछिल्ला ७ दिन",st_by:"यो हप्ताको विषयअनुसार समय",st_clear:"लग खाली गर्नुहोस्"
+};
+const EN={
+ t_learn:"Learn",l_title:"Learning toolkit",l_sub:"English and Nepali grammar, all the main maths formulas, flashcards, elements, vocabulary and a unit converter.",q10d:"Flashcards, elements, formulas, vocabulary and a unit converter.",
+ t_map:"Nepal Map",m_title:"Map of Nepal",m_sub:"7 kinds of maps: provinces, rivers, lakes, temples, mountains, parks and cities. Tap a marker.",m_reset:"Reset",m_note:"This is a simple schematic map. Borders and positions are approximate, not for travel or official use.",q9d:"7 maps: provinces, rivers, lakes, temples, mountains, parks and cities.",
+ q4d:"18 short questions, each with an explanation.",q5d:"Bikram Sambat calendar, date converter and study events.",q6d:"Calculator with sin, cos, log and square roots.",q7d:"Stopwatch that tracks study time by subject against a daily goal.",q8d:"Paths after school and a scholarship checklist.",
+ brand:"Edu Nova",t_home:"Home",t_notes:"Notes",t_gpa:"GPA Calculator",t_tools:"Study Tools",t_about:"About",
+ h_title:"Free education for every student in Nepal",h_lead:"Notes, a GPA calculator and study tools in one light, free place.",
+ h_c1:"Browse notes",h_c2:"Calculate GPA",p_title:"Education problems in Nepal and how we help",p_sub:"One website cannot fix everything, but it can help with these.",
+ q_title:"Start quickly",q1:"Notes",q1d:"Subject summaries for classes 8–12, plus your own notes.",q2:"NEB GPA",q2d:"Work out grade points and GPA for classes 11 and 12.",q3:"Study tools",q3d:"Timer, exam countdown and to-do list.",open:"Open",
+ n_title:"Subject notes",n_sub:"Summary notes. Use them alongside your textbook and teacher's notes.",search:"Search",my_title:"My notes",my_sub:"Saved on your own phone, so you can read them later without internet.",save:"Save note",
+ g_title:"NEB GPA Calculator",g_sub:"For SEE (class 10), 11 and 12. Enter theory (out of 75) and internal/practical (out of 25) marks.",g_add:"Add subject",g_clear:"Clear marks",g_gpa:"GPA",g_cr:"Total credit hours",g_pct:"Approx. percentage",
+ g_note:"GPA = Σ(credit hours × grade point) ÷ total credit hours. Approx. percentage = GPA × 25 (universities may differ). Pass rules and credit hours can change, so check the latest NEB notice.",g_scale:"NEB grade table",
+ tl_title:"Study tools",tm:"Study timer",start:"Start",reset:"Reset",ex:"Exam countdown",td:"Today's to-do list",add:"Add",
+ a_title:"About this website",a_p1:"This is a sample educational website built to give every student free access.",
+ a_p2:"Notes are summaries only. Prepare using your own syllabus and your teacher's guidance. Check official results and notices on the NEB website (neb.gov.np).",
+ a_p3:"Your data (notes, tasks, marks) stays on this phone or browser and is never sent anywhere.",foot:"Sample content: replace with your own details.",
+ t_quiz:"Practice Quiz",t_career:"Careers & Scholarships",z_title:"Practice quiz",z_sub:"18 short questions based on the notes. Every answer comes with an explanation.",
+ c_title:"Career and scholarship guide",c_sub:"General guidance on what to do after school. Confirm dates and rules in the official notice of each institution.",
+ s_title:"Scholarship application checklist",s_sub:"Tick each document when it is ready. Saved on your own phone.",
+ s_note:"Look for scholarship notices on your school or college notice board, university notices, the Ministry of Education, Science and Technology, and your local ward or municipality. Be careful of anyone who asks for money to apply.",
+ o_title:"Where to find old question papers",o_p:"Find official sample questions, syllabus and results on the NEB website (neb.gov.np). You can also ask teachers at your school or college for past papers.",
+ t_cal:"Calendar",t_calc:"Scientific Calculator",t_time:"Study Time",
+ cl_title:"Nepali calendar (Bikram Sambat)",cl_sub:"Tap a date to add study plans (exams, homework). Saturday is the weekly holiday.",cl_today:"Today",cv_title:"Date converter",cv_ad:"English date (AD)",cv_bs:"Bikram Sambat (BS): year / month / day",
+ cl_note:"This calendar uses published tables for BS 2074 to 2090. For official holidays and festivals, check the government calendar.",
+ sc_title:"Scientific calculator",sc_hist:"Recent calculations",
+ st_title:"Study time tracker",st_sub:"Keep track of how long you study, by subject. The stopwatch keeps running even if you close the page.",st_subj:"Subject",st_manual:"Add minutes by hand",st_today:"Today's study",st_goal:"Daily goal (minutes)",st_week:"Last 7 days",st_by:"This week by subject",st_clear:"Clear log"
+};
+let lang=store.get("lang","ne");
+function applyLang(){
+  const D=lang==="ne"?NE:EN;
+  document.documentElement.lang=lang;
+  $$("[data-i18n]").forEach(el=>{const k=el.dataset.i18n;if(D[k])el.textContent=D[k]});
+  $("#langBtn").textContent=lang==="ne"?"English":"नेपाली";
+  renderProblems();renderChips();renderNotes();renderScale();renderMine();tdDraw();exDraw();calc();seeNote();renderCareer();renderSch();renderMap();renderLearn();if(qOrder.length)qShow();renderToday();renderCalendar();renderStudy();calcLabels();renderAccount();
+}
+
+/* ---------- theme ---------- */
+const PAL=[["nepal","नेपाल","Nepal","#C8102E","#003893"],["ocean","सागर","Ocean","#0E7490","#1D4ED8"],["forest","हरियाली","Forest","#1F7A3D","#14532D"],["sunset","सूर्यास्त","Sunset","#C2410C","#7C2D12"],["royal","शाही","Royal","#6D28D9","#4338CA"],["rose","गुलाफी","Rose","#BE185D","#9D174D"],["gold","सुनौलो","Gold","#A16207","#854D0E"],["mint","पुदिना","Mint","#0F766E","#115E59"],["slate","स्लेट","Slate","#334155","#1E293B"],["contrast","उच्च कन्ट्रास्ट","High contrast","#000000","#FFE600"],["custom","आफ्नै रङ","Custom","",""]];
+const MODES=[["auto","स्वचालित","Auto"],["light","उज्यालो","Light"],["dark","अँध्यारो","Dark"]];
+const SIZES=[["s","सानो","Small",94],["m","सामान्य","Normal",100],["l","ठूलो","Large",112],["xl","धेरै ठूलो","X-large",125]];
+let mode=store.get("theme","auto"),pal=store.get("palette","nepal"),fsz=store.get("fsize","m");
+if(!MODES.some(m=>m[0]===mode))mode="auto";if(!PAL.some(x=>x[0]===pal))pal="nepal";
+const mq=matchMedia("(prefers-color-scheme: dark)");
+function applyTheme(){
+  const R=document.documentElement;
+  R.dataset.theme=(mode==="dark"||(mode==="auto"&&mq.matches))?"dark":"light";
+  R.dataset.palette=pal;
+  ["--red","--blue","--red-ink","--sky"].forEach(k=>R.style.removeProperty(k));
+  if(pal==="custom"){const c=store.get("customCol",{a:"#0E7490",b:"#7C3AED"}),d=R.dataset.theme==="dark",mx=h=>d?`color-mix(in srgb,${h} 68%,#fff)`:h;
+    const n=parseInt(c.a.slice(1),16),lum=(.299*(n>>16)+.587*((n>>8)&255)+.114*(n&255))/255;
+    R.style.setProperty("--red",mx(c.a));R.style.setProperty("--blue",mx(c.b));
+    R.style.setProperty("--red-ink",d||lum>.62?"#10131D":"#FFFFFF");
+    R.style.setProperty("--sky",`color-mix(in srgb,${c.b} ${d?30:14}%,var(--surface))`)}
+  R.style.fontSize=(SIZES.find(x=>x[0]===fsz)||SIZES[1])[3]+"%";
+  const m=document.querySelector("meta[name=theme-color]");if(m)m.content=getComputedStyle(R).getPropertyValue("--bg").trim()||"#F7F5F2";
+}
+if(mq.addEventListener)mq.addEventListener("change",applyTheme);
+function renderTheme(){
+  const pr=(on)=>`aria-pressed="${on}"`;
+  $("#themePanel").innerHTML=`<h3>${L("मोड","Mode")}</h3><div class="seg">${MODES.map(m=>`<button class="chip" type="button" data-m="${m[0]}" ${pr(mode===m[0])}>${L(m[1],m[2])}</button>`).join("")}</div>
+  <h3>${L("रङ थिम","Colour theme")}</h3><div class="pal">${PAL.map(x=>`<button type="button" data-p="${x[0]}" ${pr(pal===x[0])}><span class="sw" style="background:${x[0]==="custom"?"conic-gradient(red,yellow,lime,cyan,blue,magenta,red)":`linear-gradient(135deg,${x[3]} 50%,${x[4]} 50%)`}"></span>${L(x[1],x[2])}</button>`).join("")}</div>
+  ${pal==="custom"?(()=>{const c=store.get("customCol",{a:"#0E7490",b:"#7C3AED"});return `<div class="row" style="margin-top:10px;flex-wrap:nowrap"><label class="muted">${L("मुख्य","Main")}<input type="color" id="cA" value="${c.a}" style="width:64px;padding:2px"></label><label class="muted">${L("दोस्रो","Second")}<input type="color" id="cB" value="${c.b}" style="width:64px;padding:2px"></label></div>`})():""}
+  <h3>${L("अक्षरको आकार","Text size")}</h3><div class="seg">${SIZES.map(x=>`<button class="chip" type="button" data-z="${x[0]}" ${pr(fsz===x[0])}>${L(x[1],x[2])}</button>`).join("")}</div>
+  <p style="margin-top:14px"><button class="btn sm" id="thClose" type="button">${L("बन्द गर्नुहोस्","Close")}</button></p>`;
+}
+function thToggle(open){
+  const p=$("#themePanel");if(open===undefined)open=p.hidden;
+  if(open)renderTheme();p.hidden=!open;$("#themeBtn").setAttribute("aria-expanded",open);
+  if(open){const f=p.querySelector("button[aria-pressed=true]");if(f)f.focus()}else $("#themeBtn").focus();
+}
+$("#themeBtn").onclick=e=>{e.stopPropagation();thToggle()};
+$("#themePanel").onclick=e=>{
+  e.stopPropagation();const b=e.target.closest("button");if(!b)return;
+  if(b.id==="thClose")return thToggle(false);
+  if(b.dataset.m){mode=b.dataset.m;store.set("theme",mode)}
+  if(b.dataset.p){pal=b.dataset.p;store.set("palette",pal)}
+  if(b.dataset.z){fsz=b.dataset.z;store.set("fsize",fsz)}
+  applyTheme();const y=$("#themePanel").scrollTop;renderTheme();$("#themePanel").scrollTop=y;
+};
+$("#themePanel").oninput=e=>{if(e.target.id!=="cA"&&e.target.id!=="cB")return;const c=store.get("customCol",{a:"#0E7490",b:"#7C3AED"});c[e.target.id==="cA"?"a":"b"]=e.target.value;store.set("customCol",c);applyTheme()};
+document.addEventListener("click",()=>{if(!$("#themePanel").hidden)thToggle(false)});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!$("#themePanel").hidden)thToggle(false)});
+
+/* ---------- views ---------- */
+function show(v){
+  $$(".view").forEach(s=>s.classList.toggle("on",s.id==="v-"+v));
+  $$(".tab").forEach(t=>t.setAttribute("aria-selected",t.dataset.view===v));
+  window.scrollTo(0,0);
+}
+$$(".tab").forEach(t=>t.onclick=()=>show(t.dataset.view));
+$$("[data-go]").forEach(b=>b.onclick=()=>show(b.dataset.go));
+$("#langBtn").onclick=()=>{lang=lang==="ne"?"en":"ne";store.set("lang",lang);applyLang()};
+
+/* ---------- problems ---------- */
+const PROBLEMS=[
+ {p:{ne:"महँगो र ढिलो इन्टरनेट",en:"Costly, slow internet"},t:{ne:"हल्का पेज",en:"Light pages"},d:{ne:"तस्बिर र भिडियो नराखेर कम डाटामा चल्ने बनाइएको। आफ्नो नोट्स फोनमै सेभ हुन्छ।",en:"Built without heavy images or video so it uses little data. Your notes are saved on your phone."}},
+ {p:{ne:"दुर्गम ठाउँमा किताब र शिक्षकको कमी",en:"Few books and teachers in remote areas"},t:{ne:"निःशुल्क सारांश नोट्स",en:"Free summary notes"},d:{ne:"कक्षा ८ देखि १२ सम्मका मुख्य विषयका सारांश, जुन फोनबाटै पढ्न मिल्छ।",en:"Key summaries for classes 8–12 that you can read straight from a phone."}},
+ {p:{ne:"नेपाली र अंग्रेजी माध्यमको अन्तर",en:"Nepali vs English medium gap"},t:{ne:"दुई भाषा",en:"Two languages"},d:{ne:"एक क्लिकमा नेपाली र अंग्रेजी बदल्न मिल्छ।",en:"Switch between Nepali and English in one tap."}},
+ {p:{ne:"जीपीए र ग्रेड बुझ्न गाह्रो",en:"Hard to understand GPA and grades"},t:{ne:"NEB जीपीए क्यालकुलेटर",en:"NEB GPA calculator"},d:{ne:"अङ्क राख्नुहोस्, ग्रेड, ग्रेड पोइन्ट र जीपीए तुरुन्त देखिन्छ।",en:"Enter marks and see the grade, grade point and GPA instantly."}},
+ {p:{ne:"परीक्षाको तनाव र योजनाको कमी",en:"Exam stress and no study plan"},t:{ne:"टाइमर, काउन्टडाउन, कार्यसूची",en:"Timer, countdown, to-do list"},d:{ne:"दिनदिनै सानो लक्ष्य बनाएर पढ्न मद्दत गर्छ।",en:"Helps you study with small daily goals."}},
+ {p:{ne:"सबै विद्यार्थीका लागि पहुँच",en:"Access for every student"},t:{ne:"सजिलो डिजाइन",en:"Easy design"},d:{ne:"ठुला अक्षर, उच्च कन्ट्रास्ट, डार्क मोड र किबोर्डबाट चलाउन मिल्ने।",en:"Large text, strong contrast, dark mode and keyboard-friendly."}}
+];
+function renderProblems(){
+  $("#problems").innerHTML=PROBLEMS.map(x=>`<div class="card"><div class="prob">${esc(x.p[lang])}</div><h3>${esc(x.t[lang])}</h3><p class="muted">${esc(x.d[lang])}</p></div>`).join("");
+}
+
+/* ---------- notes ---------- */
+const NOTES=[
+ {s:"Maths",c:"9–10",t:"Quadratic equation",b:"<p>For <code>ax² + bx + c = 0</code>:</p><ul><li>x = (−b ± √(b² − 4ac)) / 2a</li><li>Discriminant D = b² − 4ac</li><li>D &gt; 0: two real roots. D = 0: equal roots. D &lt; 0: no real roots.</li></ul>"},
+ {s:"Maths",c:"8–10",t:"Profit and loss / गणित: नाफा र नोक्सान",b:"<ul><li>Profit = SP − CP (when SP &gt; CP)</li><li>Loss = CP − SP (when CP &gt; SP)</li><li>Profit % = (Profit / CP) × 100</li><li>नाफा = बिक्री मूल्य − क्रय मूल्य</li></ul>"},
+ {s:"Science",c:"8–10",t:"Photosynthesis",b:"<p>Plants make food using sunlight in chloroplasts.</p><p><code>6CO₂ + 6H₂O → C₆H₁₂O₆ + 6O₂</code> (needs light and chlorophyll)</p>"},
+ {s:"Science",c:"9–10",t:"Newton's laws of motion",b:"<ul><li>1st: An object stays at rest or in uniform motion unless a net force acts (inertia).</li><li>2nd: <code>F = ma</code></li><li>3rd: Every action has an equal and opposite reaction.</li></ul>"},
+ {s:"Physics",c:"11–12",t:"Equations of motion",b:"<p>For constant acceleration:</p><ul><li><code>v = u + at</code></li><li><code>s = ut + ½at²</code></li><li><code>v² = u² + 2as</code></li></ul><p>Ohm's law: <code>V = IR</code></p>"},
+ {s:"Chemistry",c:"11–12",t:"Mole concept",b:"<ul><li>1 mole = 6.022 × 10²³ particles (Avogadro's number)</li><li>Number of moles n = mass / molar mass</li><li>At STP, 1 mole of gas occupies 22.4 L</li></ul>"},
+ {s:"Biology",c:"9–12",t:"Cell and its organelles",b:"<ul><li>Nucleus: controls the cell, holds DNA</li><li>Mitochondria: release energy (ATP)</li><li>Ribosome: makes proteins</li><li>Chloroplast: photosynthesis (plant cells)</li><li>Cell membrane: controls what enters and leaves</li></ul>"},
+ {s:"Accountancy",c:"11–12",t:"Accounting equation",b:"<p><code>Assets = Liabilities + Owner's Equity</code></p><ul><li>Debit: increases assets and expenses</li><li>Credit: increases liabilities, capital and income</li></ul>"},
+ {s:"English",c:"8–12",t:"Tenses at a glance",b:"<ul><li>Simple present: She <i>reads</i> daily.</li><li>Present continuous: She <i>is reading</i> now.</li><li>Simple past: She <i>read</i> yesterday.</li><li>Present perfect: She <i>has read</i> the book.</li><li>Simple future: She <i>will read</i> tomorrow.</li></ul>"},
+ {s:"English",c:"8–12",t:"Formal letter format",b:"<ul><li>Sender's address and date</li><li>Receiver's name and address</li><li>Subject line</li><li>Salutation (Dear Sir/Madam)</li><li>Body: purpose, details, request</li><li>Closing (Yours faithfully) and signature</li></ul>"},
+ {s:"Nepali",c:"8–12",t:"निबन्ध लेखन ढाँचा",b:"<ul><li>शीर्षक</li><li>भूमिका: विषयको परिचय</li><li>मुख्य भाग: २–३ अनुच्छेदमा तर्क र उदाहरण</li><li>उपसंहार: निष्कर्ष र सन्देश</li></ul>"},
+ {s:"Social",c:"8–10",t:"Nepal at a glance",b:"<ul><li>Federal democratic republic since 2008</li><li>Constitution promulgated on 3 Asoj 2072 BS (20 Sept 2015)</li><li>7 provinces, 77 districts, 753 local levels</li><li>Capital: Kathmandu</li><li>Mount Everest (Sagarmatha): 8,848.86 m</li></ul>"},
+ {s:"Computer",c:"8–12",t:"Bits, bytes and binary",b:"<ul><li>1 byte = 8 bits</li><li>1 KB = 1024 bytes; 1 MB = 1024 KB</li><li>Decimal 10 = binary 1010</li><li>Input: keyboard, mouse. Output: monitor, printer.</li></ul>"},
+ {s:"Maths",c:"8–10",t:"Pythagoras theorem",b:"<p>In a right-angled triangle: <code>h² = p² + b²</code></p><ul><li>Common triples: 3-4-5, 5-12-13</li><li>sin θ = p/h, cos θ = b/h, tan θ = p/b</li></ul>"},
+ {s:"Physics",c:"9–12",t:"Reflection and refraction",b:"<ul><li>Law of reflection: angle of incidence = angle of reflection</li><li>Snell's law: <code>n = sin i / sin r</code></li><li>Mirror formula: <code>1/f = 1/u + 1/v</code></li></ul>"},
+ {s:"Chemistry",c:"8–12",t:"Acids, bases and pH",b:"<ul><li>pH below 7: acidic. pH 7: neutral. pH above 7: basic.</li><li>Acid + base → salt + water (neutralisation)</li><li>Litmus: acids turn blue litmus red</li></ul>"},
+ {s:"Biology",c:"9–12",t:"Human digestive system",b:"<ul><li>Mouth → oesophagus → stomach → small intestine → large intestine</li><li>Small intestine absorbs most nutrients</li><li>Liver makes bile, which helps digest fats</li></ul>"},
+ {s:"Economics",c:"11–12",t:"Demand and supply",b:"<ul><li>Law of demand: price up, quantity demanded down</li><li>Law of supply: price up, quantity supplied up</li><li>Equilibrium: where demand equals supply</li></ul>"},
+ {s:"Computer",c:"8–12",t:"Computer networks",b:"<ul><li>LAN: small area. WAN: large area. The internet is the biggest WAN.</li><li>IP address identifies a device; a browser opens websites</li><li>Use strong passwords and never share OTPs</li></ul>"}
+];
+let subj="All";
+const SUBJECTS=["All",...new Set(NOTES.map(n=>n.s))];
+function renderChips(){
+  $("#subjChips").innerHTML=SUBJECTS.map(s=>`<button class="chip" type="button" aria-pressed="${s===subj}" data-s="${esc(s)}">${esc(s)}</button>`).join("");
+  $$("#subjChips .chip").forEach(b=>b.onclick=()=>{subj=b.dataset.s;renderChips();renderNotes()});
+}
+function renderNotes(){
+  const q=$("#search").value.trim().toLowerCase();
+  const items=NOTES.filter(n=>(subj==="All"||n.s===subj)&&(!q||(n.t+n.s+n.b).toLowerCase().includes(q)));
+  $("#notesList").innerHTML=items.length?items.map(n=>`<details class="note"><summary><span>${esc(n.t)}</span><span class="tag">${esc(n.s)} · ${esc(n.c)}</span></summary><div class="body">${n.b}</div></details>`).join(""):
+    `<div class="card muted">${lang==="ne"?"कुनै नोट भेटिएन। अर्को शब्द वा विषय छान्नुहोस्।":"No notes found. Try another word or subject."}</div>`;
+}
+$("#search").oninput=renderNotes;
+
+/* my notes */
+let mine=store.get("myNotes",[]);
+function renderMine(){
+  $("#myNotes").innerHTML=mine.length?mine.map((n,i)=>`<details class="note"><summary><span>${esc(n.t)}</span><span class="tag">mine</span></summary><div class="body"><p style="white-space:pre-wrap">${esc(n.x)}</p><p style="margin-top:10px"><button class="btn ghost sm" data-del="${i}" type="button">Delete</button></p></div></details>`).join(""):
+    `<p class="muted">${lang==="ne"?"अहिलेसम्म कुनै नोट छैन। माथि आफ्नो पहिलो नोट लेख्नुहोस्।":"No notes yet. Write your first note above."}</p>`;
+  $$("#myNotes [data-del]").forEach(b=>b.onclick=()=>{mine.splice(+b.dataset.del,1);store.set("myNotes",mine);renderMine()});
+}
+$("#mnAdd").onclick=()=>{
+  const t=$("#mnTitle").value.trim(),x=$("#mnText").value.trim();
+  if(!t||!x){$("#mnTitle").focus();return}
+  mine.unshift({t,x});store.set("myNotes",mine);$("#mnTitle").value="";$("#mnText").value="";renderMine();
+};
+
+/* ---------- GPA ---------- */
+const SCALE=[[90,"A+",4.0,"Outstanding"],[80,"A",3.6,"Excellent"],[70,"B+",3.2,"Very Good"],[60,"B",2.8,"Good"],[50,"C+",2.4,"Satisfactory"],[40,"C",2.0,"Acceptable"],[35,"D",1.6,"Partially acceptable"]];
+function gradeOf(pct){for(const [m,g,p] of SCALE){if(pct>=m)return{g,p}}return{g:"NG",p:0}}
+function renderScale(){
+  $("#scale").innerHTML="<tr><th>%</th><th>Grade</th><th>GP</th><th></th></tr>"+SCALE.map((r,i)=>`<tr><td>${r[0]}${i===0?"–100":"–"+(SCALE[i-1][0]-1)}</td><td><b>${r[1]}</b></td><td>${r[2].toFixed(1)}</td><td>${r[3]}</td></tr>`).join("")+"<tr><td>&lt; 35</td><td><b>NG</b></td><td>0</td><td>Non-graded</td></tr>";
+}
+const STREAMS={
+ Science:[["Nepali",3],["English",4],["Physics",5],["Chemistry",5],["Mathematics",5],["Biology / Computer",5]],
+ Management:[["Nepali",3],["English",4],["Accountancy",5],["Economics",5],["Business Studies",5],["Mathematics / Hotel Mgmt",5]],
+ "SEE (Class 10)":[["Nepali",4],["English",4],["Mathematics",4],["Science",4],["Social Studies",4],["Optional I",4],["Optional II",4]],
+ Custom:[["Subject 1",3],["Subject 2",3],["Subject 3",3]]
+};
+let stream=store.get("stream","Science");
+let rows=store.get("gRows",null)||STREAMS[stream].map(([n,c])=>({n,c,t:"",i:""}));
+function renderStreams(){
+  $("#streamChips").innerHTML=Object.keys(STREAMS).map(s=>`<button class="chip" type="button" aria-pressed="${s===stream}" data-s="${s}">${s}</button>`).join("");
+  $$("#streamChips .chip").forEach(b=>b.onclick=()=>{stream=b.dataset.s;store.set("stream",stream);rows=STREAMS[stream].map(([n,c])=>({n,c,t:"",i:""}));renderStreams();renderRows()});
+}
+function seeNote(){
+  const n=$("#seeNote");n.hidden=stream!=="SEE (Class 10)";
+  n.textContent=lang==="ne"?"SEE का विषय, क्रेडिट आवर र सैद्धान्तिक/आन्तरिक अङ्क विभाजन तपाईंको मार्कसिट अनुसार सच्याउनुहोस्।":"Edit SEE subjects, credit hours and the theory/internal split to match your own marksheet.";
+}
+function renderRows(){seeNote();
+  $("#gRows").innerHTML=rows.map((r,k)=>`<div class="grow" data-k="${k}">
+    <div class="full"><label>Subject</label><input data-f="n" value="${esc(r.n)}"></div>
+    <div><label>Credit hr</label><input data-f="c" type="number" inputmode="decimal" min="0" step="0.5" value="${esc(r.c)}"></div>
+    <div><label>Theory /75</label><input data-f="t" type="number" inputmode="decimal" min="0" max="75" value="${esc(r.t)}"></div>
+    <div><label>Internal / Practical /25</label><input data-f="i" type="number" inputmode="decimal" min="0" max="25" value="${esc(r.i)}"></div>
+    <div class="res"><span class="out"></span><button class="btn ghost sm" type="button" data-rm="${k}">Remove</button></div></div>`).join("");
+  $$("#gRows .grow").forEach(el=>{
+    const k=+el.dataset.k;
+    el.querySelectorAll("input").forEach(inp=>inp.oninput=()=>{rows[k][inp.dataset.f]=inp.value;calc()});
+    el.querySelector("[data-rm]").onclick=()=>{rows.splice(k,1);renderRows()};
+  });
+  calc();
+}
+function calc(){
+  let cr=0,pts=0,fail=0,filled=0;
+  $$("#gRows .grow").forEach((el,k)=>{
+    const r=rows[k],out=el.querySelector(".out");
+    if(r.t===""||r.i===""){out.innerHTML="<span class='muted'>—</span>";return}
+    const t=Math.min(75,Math.max(0,+r.t)),i=Math.min(25,Math.max(0,+r.i)),c=Math.max(0,+r.c||0);
+    const total=t+i;
+    let res=gradeOf(total);
+    if(t<0.35*75)res={g:"NG",p:0};
+    filled++;cr+=c;pts+=c*res.p;if(res.g==="NG")fail++;
+    out.innerHTML=`<span>${total} / 100 </span><span class="badge ${res.g==="NG"?"ng":""}">${res.g}</span> <span>GP ${res.p.toFixed(1)}</span>`;
+  });
+  store.set("gRows",rows);
+  const gpa=cr?pts/cr:null;
+  $("#gGpa").textContent=gpa===null?"–":gpa.toFixed(2);
+  $("#gCr").textContent=cr;
+  $("#gPct").textContent=gpa===null?"–":(gpa*25).toFixed(1)+"%";
+  $("#gStatus").textContent=filled===0?"":fail?(lang==="ne"?`${fail} विषयमा NG छ। ती विषयमा पुनः परीक्षा दिनुपर्ने हुन सक्छ।`:`${fail} subject(s) are NG. You may need to re-sit them.`):(lang==="ne"?"सबै विषय उत्तीर्ण।":"All subjects passed.");
+}
+$("#gAdd").onclick=()=>{rows.push({n:"New subject",c:3,t:"",i:""});renderRows()};
+$("#gClear").onclick=()=>{rows.forEach(r=>{r.t="";r.i=""});renderRows()};
+
+/* ---------- study tools ---------- */
+let mins=25,left=mins*60,timer=null;
+const fmt=s=>String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0");
+function tmDraw(){$("#tmShow").textContent=fmt(left)}
+$$("[data-min]").forEach(b=>b.onclick=()=>{
+  mins=+b.dataset.min;left=mins*60;clearInterval(timer);timer=null;$("#tmStart").textContent=lang==="ne"?"सुरु":"Start";$("#tmMsg").textContent="";
+  $$("[data-min]").forEach(x=>x.setAttribute("aria-pressed",x===b));tmDraw();
+});
+$("#tmStart").onclick=()=>{
+  if(timer){clearInterval(timer);timer=null;$("#tmStart").textContent=lang==="ne"?"सुरु":"Start";return}
+  $("#tmStart").textContent=lang==="ne"?"रोक्नुहोस्":"Pause";
+  timer=setInterval(()=>{left--;tmDraw();if(left<=0){clearInterval(timer);timer=null;left=0;$("#tmStart").textContent=lang==="ne"?"सुरु":"Start";$("#tmMsg").textContent=lang==="ne"?"समय सकियो। छोटो ब्रेक लिनुहोस्।":"Time is up. Take a short break.";if(navigator.vibrate)navigator.vibrate(300)}},1000);
+};
+$("#tmReset").onclick=()=>{clearInterval(timer);timer=null;left=mins*60;$("#tmStart").textContent=lang==="ne"?"सुरु":"Start";$("#tmMsg").textContent="";tmDraw()};
+
+function exLoad(){const ex=store.get("exam",{name:"",date:""});$("#exName").value=ex.name;$("#exDate").value=ex.date}exLoad();
+function exDraw(){
+  const d=$("#exDate").value,n=$("#exName").value.trim()||(lang==="ne"?"परीक्षा":"Exam");
+  store.set("exam",{name:$("#exName").value,date:d});
+  if(!d){$("#exOut").textContent="";return}
+  const days=Math.ceil((new Date(d+"T00:00:00")-new Date(new Date().toDateString()))/864e5);
+  $("#exOut").textContent=days>0?(lang==="ne"?`${n}: ${days} दिन बाँकी`:`${n}: ${days} days left`):days===0?(lang==="ne"?`${n}: आज!`:`${n}: today!`):(lang==="ne"?"मिति बितिसक्यो":"That date has passed");
+}
+$("#exName").oninput=exDraw;$("#exDate").oninput=exDraw;
+
+let tasks=store.get("tasks",[]);
+function tdDraw(){
+  $("#tdList").innerHTML=tasks.length?tasks.map((t,i)=>`<div class="task ${t.d?"done":""}"><input type="checkbox" ${t.d?"checked":""} data-c="${i}" aria-label="Done"><span>${esc(t.x)}</span><button class="btn ghost sm" data-r="${i}" type="button" aria-label="Remove task">✕</button></div>`).join(""):
+   `<p class="muted">${lang==="ne"?"आजको लागि पहिलो काम थप्नुहोस्।":"Add your first task for today."}</p>`;
+  $$("#tdList [data-c]").forEach(c=>c.onchange=()=>{tasks[+c.dataset.c].d=c.checked;store.set("tasks",tasks);tdDraw()});
+  $$("#tdList [data-r]").forEach(b=>b.onclick=()=>{tasks.splice(+b.dataset.r,1);store.set("tasks",tasks);tdDraw()});
+}
+function tdAdd(){const x=$("#tdText").value.trim();if(!x)return;tasks.push({x,d:false});store.set("tasks",tasks);$("#tdText").value="";tdDraw()}
+$("#tdAdd").onclick=tdAdd;$("#tdText").onkeydown=e=>{if(e.key==="Enter")tdAdd()};
+
+/* ---------- quiz ---------- */
+const QZ=[
+ {q:"Discriminant of a quadratic equation ax² + bx + c = 0?",o:["b² − 4ac","b² + 4ac","2a − b","a² − 4bc"],a:0,e:"D = b² − 4ac tells how many real roots the equation has."},
+ {q:"Newton's second law is written as:",o:["F = mv","F = ma","F = m/a","F = a/m"],a:1,e:"Force equals mass times acceleration."},
+ {q:"Which organelle is called the powerhouse of the cell?",o:["Ribosome","Nucleus","Mitochondria","Chloroplast"],a:2,e:"Mitochondria release energy (ATP) for the cell."},
+ {q:"Products of photosynthesis are:",o:["CO₂ and water","Glucose and oxygen","Starch and nitrogen","Oxygen and water only"],a:1,e:"6CO₂ + 6H₂O → C₆H₁₂O₆ + 6O₂."},
+ {q:"1 byte equals:",o:["4 bits","8 bits","16 bits","10 bits"],a:1,e:"A byte is 8 bits."},
+ {q:"Avogadro's number is approximately:",o:["6.022 × 10²³","3.14 × 10⁸","9.8 × 10¹","1.6 × 10⁻¹⁹"],a:0,e:"One mole contains about 6.022 × 10²³ particles."},
+ {q:"The accounting equation is:",o:["Assets = Income − Expenses","Assets = Liabilities + Owner's Equity","Capital = Assets + Liabilities","Profit = Assets × Liabilities"],a:1,e:"Everything a business owns is financed by liabilities or owner's equity."},
+ {q:"How many provinces does Nepal have?",o:["5","6","7","9"],a:2,e:"Nepal has 7 provinces."},
+ {q:"The height of Mount Everest (Sagarmatha) is:",o:["8,848.86 m","8,586 m","8,167 m","8,091 m"],a:0,e:"8,848.86 m is the officially declared height."},
+ {q:"In NEB grading, 85 marks gives which grade and grade point?",o:["A+ (4.0)","A (3.6)","B+ (3.2)","B (2.8)"],a:1,e:"80 to 89 marks is grade A with grade point 3.6."},
+ {q:"Decimal 10 in binary is:",o:["1001","1100","1010","1110"],a:2,e:"10 = 8 + 2 = 1010 in binary."},
+ {q:"Which sentence is in the present perfect tense?",o:["She reads daily.","She is reading now.","She has read the book.","She will read tomorrow."],a:2,e:"Present perfect = has/have + past participle."},
+ {q:"In a right triangle with sides 3 and 4, the hypotenuse is:",o:["5","6","7","12"],a:0,e:"3² + 4² = 25, and √25 = 5."},
+ {q:"Ohm's law is:",o:["V = IR","V = I/R","V = I + R","I = VR"],a:0,e:"Voltage equals current times resistance."},
+ {q:"A solution with pH 7 is:",o:["Acidic","Basic","Neutral","Salty"],a:2,e:"pH 7 is neutral; below 7 is acidic and above 7 is basic."},
+ {q:"Which organ makes bile?",o:["Stomach","Liver","Kidney","Pancreas"],a:1,e:"The liver makes bile to help digest fats."},
+ {q:"When price rises, the law of demand says quantity demanded:",o:["Rises","Falls","Stays the same","Doubles"],a:1,e:"Demand and price move in opposite directions."},
+ {q:"CPU stands for:",o:["Central Processing Unit","Computer Personal Unit","Central Program Utility","Control Processing User"],a:0,e:"The CPU is the main processor of a computer."}
+];
+let qi=0,qs=0,qOrder=[];
+function qStart(){qOrder=[...QZ.keys()].sort(()=>Math.random()-.5);qi=0;qs=0;qShow()}
+function qShow(){
+  const box=$("#qBox"),best=store.get("bestQuiz",0);
+  if(qi>=qOrder.length){
+    if(qs>best)store.set("bestQuiz",qs);
+    box.innerHTML=`<h3>${lang==="ne"?"तपाईंको स्कोर":"Your score"}: ${qs} / ${qOrder.length}</h3><p class="muted" style="margin:6px 0 14px">${lang==="ne"?"उत्कृष्ट स्कोर":"Best score"}: ${Math.max(qs,best)} / ${qOrder.length}</p><button class="btn" id="qAgain" type="button">${lang==="ne"?"फेरि खेल्नुहोस्":"Try again"}</button>`;
+    $("#qAgain").onclick=qStart;return;
+  }
+  const q=QZ[qOrder[qi]];
+  box.innerHTML=`<p class="muted">${qi+1} / ${qOrder.length}</p><h3 style="margin:6px 0 14px">${esc(q.q)}</h3><div class="grid" id="qOpts" style="margin:0">${q.o.map((o,k)=>`<button class="chip" style="text-align:left;border-radius:12px" type="button" data-k="${k}">${esc(o)}</button>`).join("")}</div><div id="qFb" style="margin-top:14px"></div>`;
+  $$("#qOpts .chip").forEach(b=>b.onclick=()=>{
+    const k=+b.dataset.k,ok=k===q.a;if(ok)qs++;
+    $$("#qOpts .chip").forEach(x=>{x.disabled=true;if(+x.dataset.k===q.a)x.style.borderColor="var(--good)";else if(x===b)x.style.borderColor="var(--red)"});
+    $("#qFb").innerHTML=`<p><b style="color:${ok?"var(--good)":"var(--bad)"}">${ok?(lang==="ne"?"सही!":"Correct!"):(lang==="ne"?"गलत।":"Not quite.")}</b> ${esc(q.e)}</p><p style="margin-top:10px"><button class="btn sm" id="qNext" type="button">${lang==="ne"?"अर्को":"Next"}</button></p>`;
+    $("#qNext").onclick=()=>{qi++;qShow()};$("#qNext").focus();
+  });
+}
+
+/* ---------- career ---------- */
+const CAREER=[
+ {t:{ne:"SEE पछि",en:"After SEE (Class 10)"},i:{ne:["कक्षा ११–१२ (+२) मा विज्ञान, व्यवस्थापन, मानविकी, शिक्षा वा कानून जस्ता विषय छान्न सकिन्छ।","प्राविधिक डिप्लोमा (CTEVT) जस्ता छोटो अवधिका व्यावसायिक कार्यक्रम पनि विकल्प हुन्।","रुचि, आफ्नो अङ्क र नजिकको कलेजमा उपलब्ध विषय हेरेर निर्णय गर्नुहोस्।"],en:["Choose a +2 stream such as Science, Management, Humanities, Education or Law in classes 11–12.","Technical diploma programs (CTEVT) are a shorter, job-focused option.","Decide using your interests, your marks and what nearby colleges offer."]}},
+ {t:{ne:"+२ पछि",en:"After +2 (Class 12)"},i:{ne:["विश्वविद्यालयमा स्नातक तह (TU, KU, PU र अन्य)।","इन्जिनियरिङ र मेडिकल जस्ता कतिपय कार्यक्रममा प्रवेश परीक्षा हुन्छ। सम्बन्धित विश्वविद्यालयको सूचना हेर्नुहोस्।","विदेशमा पढ्ने सोच भए भाषा परीक्षा, कागजात र खर्चको योजना अगाडि नै बनाउनुहोस्।"],en:["Bachelor's programs at universities such as TU, KU and PU.","Some programs, such as engineering and medicine, use entrance exams. Check each university's notice.","If you plan to study abroad, plan language tests, documents and costs early."]}},
+ {t:{ne:"सरकारी जागिर",en:"Government jobs"},i:{ne:["लोक सेवा आयोगले विभिन्न पदका लागि खुला प्रतियोगिता सञ्चालन गर्छ।","शिक्षक बन्न चाहनेले शिक्षक सेवा आयोगको सूचना हेर्नुहोस्।","पाठ्यक्रम र योग्यता हरेक विज्ञापनमा पढेर मात्र आवेदन दिनुहोस्।"],en:["The Public Service Commission (Lok Sewa Aayog) runs open competitions for many posts.","If you want to teach, watch for Teacher Service Commission notices.","Read the syllabus and eligibility in each advertisement before applying."]}},
+ {t:{ne:"सीप र उद्यम",en:"Skills and enterprise"},i:{ne:["कम्प्युटर, सिलाइकटाइ, कृषि प्रविधि, पर्यटन सेवा जस्ता सीपले छिटो आम्दानीको बाटो खोल्छ।","स्थानीय तहले दिने सीपमूलक तालिमबारे वडा कार्यालयमा सोध्नुहोस्।","पढाइसँगै सानो अनलाइन सीप सिक्न सकिन्छ।"],en:["Skills like computing, tailoring, farm technology and tourism services can lead to income sooner.","Ask your ward office about skills training offered by local government.","You can learn a small online skill while you study."]}}
+];
+function renderCareer(){
+  $("#careerCards").innerHTML=CAREER.map(c=>`<div class="card"><h3>${esc(c.t[lang])}</h3><ul style="margin:8px 0 0;padding-left:1.2rem">${c.i[lang].map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>`).join("");
+}
+const SCH={ne:["नागरिकता वा जन्मदर्ता प्रमाणपत्रको प्रतिलिपि","कक्षागत मार्कसिट र चारित्रिक प्रमाणपत्र","पासपोर्ट साइजको फोटो","स्कुल/कलेजको सिफारिस पत्र","वडा कार्यालयको सिफारिस (आवश्यक परे)","भरिएको आवेदन फारम","आवेदन अन्तिम मिति नोट गरेको"],
+           en:["Copy of citizenship or birth certificate","Marksheets and character certificate","Passport-size photo","Recommendation letter from school or college","Ward office recommendation (if required)","Filled application form","Application deadline noted down"]};
+let schDone=store.get("sch",[]);
+function renderSch(){
+  $("#schList").innerHTML=SCH[lang].map((t,i)=>`<label class="task ${schDone.includes(i)?"done":""}" style="margin:0"><input type="checkbox" data-i="${i}" ${schDone.includes(i)?"checked":""}><span>${esc(t)}</span></label>`).join("");
+  $$("#schList input").forEach(c=>c.onchange=()=>{const i=+c.dataset.i;schDone=schDone.filter(x=>x!==i);if(c.checked)schDone.push(i);store.set("sch",schDone);renderSch()});
+}
+
+/* ---------- helpers ---------- */
+const L=(ne,en)=>lang==="ne"?ne:en;
+const nd=x=>lang==="ne"?String(x).replace(/\d/g,d=>"०१२३४५६७८९"[d]):String(x);
+const pad=n=>String(n).padStart(2,"0");
+const dkey=d=>d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate());
+
+/* ---------- Bikram Sambat calendar ---------- */
+const BSD={
+2074:[31,31,31,32,31,31,30,29,30,29,30,30],2075:[31,31,32,31,31,31,30,29,30,29,30,30],2076:[31,32,31,32,31,30,30,30,29,29,30,30],
+2077:[31,32,31,32,31,30,30,30,29,30,29,31],2078:[31,31,31,32,31,31,30,29,30,29,30,30],2079:[31,31,32,31,31,31,30,29,30,29,30,30],
+2080:[31,32,31,32,31,30,30,30,29,29,30,30],2081:[31,31,32,32,31,30,30,30,29,30,30,30],2082:[30,32,31,32,31,30,30,30,29,30,30,30],
+2083:[31,31,32,31,31,30,30,30,29,30,30,30],2084:[31,31,32,31,31,30,30,30,29,30,30,30],2085:[31,32,31,32,30,31,30,30,29,30,30,30],
+2086:[30,32,31,32,31,30,30,30,29,30,30,30],2087:[31,31,32,31,31,31,30,30,29,30,30,30],2088:[30,31,32,32,30,31,30,30,29,30,30,30],
+2089:[30,32,31,32,31,30,30,30,29,30,30,30],2090:[30,32,31,32,31,30,30,30,29,30,30,30]};
+const BS_MIN=2074,BS_MAX=2090,EPOCH=Date.UTC(2017,3,14)/864e5; // 2074-01-01 BS = 14 Apr 2017
+const BSM={ne:["बैशाख","जेठ","असार","साउन","भदौ","असोज","कात्तिक","मंसिर","पुष","माघ","फागुन","चैत"],en:["Baisakh","Jestha","Ashadh","Shrawan","Bhadra","Ashwin","Kartik","Mangsir","Poush","Magh","Falgun","Chaitra"]};
+const WDS={ne:["आइत","सोम","मंगल","बुध","बिहि","शुक्र","शनि"],en:["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]};
+const WDF={ne:["आइतबार","सोमबार","मंगलबार","बुधबार","बिहीबार","शुक्रबार","शनिबार"],en:["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]};
+const ADM=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+const mlen=(y,m)=>BSD[y][m-1], ylen=y=>BSD[y].reduce((a,b)=>a+b,0);
+function bs2n(y,m,d){let n=0;for(let i=BS_MIN;i<y;i++)n+=ylen(i);for(let i=1;i<m;i++)n+=mlen(y,i);return n+d-1}
+function n2bs(n){if(n<0)return null;let y=BS_MIN;while(y<=BS_MAX&&n>=ylen(y)){n-=ylen(y);y++}if(y>BS_MAX)return null;let m=1;while(n>=mlen(y,m)){n-=mlen(y,m);m++}return{y,m,d:n+1}}
+const ad2n=(Y,M,D)=>Date.UTC(Y,M-1,D)/864e5-EPOCH;
+const n2ad=n=>new Date((EPOCH+n)*864e5);
+const adStr=dt=>dt.getUTCDate()+" "+ADM[dt.getUTCMonth()]+" "+dt.getUTCFullYear();
+const nowBs=()=>{const t=new Date();return n2bs(ad2n(t.getFullYear(),t.getMonth()+1,t.getDate()))};
+const validBs=(y,m,d)=>y>=BS_MIN&&y<=BS_MAX&&m>=1&&m<=12&&d>=1&&d<=mlen(y,m);
+
+let tb=nowBs()||{y:2083,m:1,d:1};
+let cy=tb.y,cm=tb.m,sel={...tb};
+let evs=store.get("calEv",{});
+const evKey=o=>o.y+"-"+o.m+"-"+o.d;
+
+function renderToday(){
+  const t=nowBs();if(!t){$("#todayBs").textContent="";return}
+  const wd=new Date().getDay();
+  $("#todayBs").textContent=L("आज: ","Today: ")+WDF[lang][wd]+", "+nd(t.d)+" "+BSM[lang][t.m-1]+" "+nd(t.y)+" BS";
+}
+function fillCalSelects(){
+  $("#calM").innerHTML=BSM[lang].map((m,i)=>`<option value="${i+1}">${m}</option>`).join("");
+  $("#calY").innerHTML=Object.keys(BSD).map(y=>`<option value="${y}">${nd(y)}</option>`).join("");
+}
+function renderCalendar(){
+  fillCalSelects();
+  $("#calM").value=cm;$("#calY").value=cy;
+  const total=mlen(cy,cm),n0=bs2n(cy,cm,1),first=n2ad(n0),last=n2ad(n0+total-1);
+  $("#calAd").textContent=ADM[first.getUTCMonth()]+" "+first.getUTCFullYear()+" – "+ADM[last.getUTCMonth()]+" "+last.getUTCFullYear();
+  let h=WDS[lang].map((w,i)=>`<div class="wd ${i===6?"sat":""}">${w}</div>`).join("");
+  for(let i=0;i<first.getUTCDay();i++)h+='<div class="day blank"></div>';
+  for(let d=1;d<=total;d++){
+    const ad=n2ad(n0+d-1),wd=ad.getUTCDay(),o={y:cy,m:cm,d};
+    const isT=tb&&tb.y===cy&&tb.m===cm&&tb.d===d&&!!nowBs()&&nowBs().y===cy&&nowBs().m===cm&&nowBs().d===d;
+    const isS=sel.y===cy&&sel.m===cm&&sel.d===d;
+    h+=`<button type="button" class="day ${wd===6?"sat":""} ${isT?"today":""} ${isS?"sel":""} ${(evs[evKey(o)]||[]).length?"ev":""}" data-d="${d}" aria-label="${nd(d)} ${BSM[lang][cm-1]}"><b>${nd(d)}</b><small>${ad.getUTCDate()===1?ADM[ad.getUTCMonth()]+" 1":ad.getUTCDate()}</small></button>`;
+  }
+  $("#calGrid").innerHTML=h;
+  $$("#calGrid .day[data-d]").forEach(b=>b.onclick=()=>{sel={y:cy,m:cm,d:+b.dataset.d};renderCalendar()});
+  renderSel();
+}
+function renderSel(){
+  if(!validBs(sel.y,sel.m,sel.d)){$("#calSel").innerHTML="";return}
+  const ad=n2ad(bs2n(sel.y,sel.m,sel.d)),list=evs[evKey(sel)]||[];
+  $("#calSel").innerHTML=`<h3>${WDF[lang][ad.getUTCDay()]}, ${nd(sel.d)} ${BSM[lang][sel.m-1]} ${nd(sel.y)} BS</h3>
+   <p class="muted">${adStr(ad)} AD</p>
+   <div style="margin:10px 0">${list.length?list.map((t,i)=>`<div class="task"><span>${esc(t)}</span><button class="btn ghost sm" data-rm="${i}" type="button" aria-label="Remove">✕</button></div>`).join(""):`<p class="muted">${L("यो मितिमा कुनै कार्यक्रम छैन।","No plans on this date.")}</p>`}</div>
+   <div class="row" style="flex-wrap:nowrap"><input id="evText" maxlength="80" placeholder="${L("जस्तै: भौतिकशास्त्र परीक्षा","e.g. Physics exam")}" aria-label="Plan"><button class="btn" id="evAdd" type="button">${L("थप्नुहोस्","Add")}</button></div>`;
+  const add=()=>{const v=$("#evText").value.trim();if(!v)return;const k=evKey(sel);evs[k]=[...(evs[k]||[]),v];store.set("calEv",evs);renderCalendar()};
+  $("#evAdd").onclick=add;$("#evText").onkeydown=e=>{if(e.key==="Enter")add()};
+  $$("#calSel [data-rm]").forEach(b=>b.onclick=()=>{const k=evKey(sel);evs[k].splice(+b.dataset.rm,1);if(!evs[k].length)delete evs[k];store.set("calEv",evs);renderCalendar()});
+}
+function calMove(dm){cm+=dm;if(cm>12){cm=1;cy++}if(cm<1){cm=12;cy--}if(cy<BS_MIN){cy=BS_MIN;cm=1}if(cy>BS_MAX){cy=BS_MAX;cm=12}renderCalendar()}
+$("#calPrev").onclick=()=>calMove(-1);$("#calNext").onclick=()=>calMove(1);
+$("#calM").onchange=e=>{cm=+e.target.value;renderCalendar()};$("#calY").onchange=e=>{cy=+e.target.value;renderCalendar()};
+$("#calToday").onclick=()=>{const t=nowBs();if(t){cy=t.y;cm=t.m;sel={...t};renderCalendar()}};
+/* converter */
+$("#cvAd").oninput=()=>{
+  const v=$("#cvAd").value;if(!v){$("#cvAdOut").textContent="";return}
+  const [Y,M,D]=v.split("-").map(Number),b=n2bs(ad2n(Y,M,D));
+  $("#cvAdOut").textContent=b?`${nd(b.d)} ${BSM[lang][b.m-1]} ${nd(b.y)} BS`:L("यो मिति समर्थित दायरा (२०७४–२०९० BS) बाहिर छ।","This date is outside the supported range (BS 2074–2090).");
+};
+function cvBs(){
+  const y=+$("#cvY").value,m=+$("#cvM").value,d=+$("#cvD").value;
+  if(!y||!m||!d){$("#cvBsOut").textContent="";return}
+  $("#cvBsOut").textContent=validBs(y,m,d)?adStr(n2ad(bs2n(y,m,d)))+" AD":L("मान्य BS मिति राख्नुहोस् (२०७४–२०९०)।","Enter a valid BS date (2074–2090).");
+}
+["#cvY","#cvM","#cvD"].forEach(id=>$(id).oninput=cvBs);
+
+/* ---------- scientific calculator ---------- */
+let degMode=store.get("deg",true),ans=0,justEq=false,hist=store.get("calcHist",[]);
+const KEYS=[
+ ["sin","sin(","fn"],["cos","cos(","fn"],["tan","tan(","fn"],["ln","ln(","fn"],["log","log(","fn"],
+ ["sin⁻¹","asin(","fn"],["cos⁻¹","acos(","fn"],["tan⁻¹","atan(","fn"],["√","√(","fn"],["xʸ","^","fn"],
+ ["π","π","fn"],["e","e","fn"],["(","(","fn"],[")",")","fn"],["x!","!","fn"],
+ ["7","7",""],["8","8",""],["9","9",""],["÷","÷","op"],["⌫","BS","op"],
+ ["4","4",""],["5","5",""],["6","6",""],["×","×","op"],["AC","AC","op"],
+ ["1","1",""],["2","2",""],["3","3",""],["−","−","op"],["Ans","ans","fn"],
+ ["0","0",""],[".",".",""],["%","%","fn"],["+","+","op"],["=","EQ","eq"]
+];
+$("#keys").innerHTML=KEYS.map(k=>`<button type="button" class="key ${k[2]}" data-k="${esc(k[1])}">${esc(k[0])}</button>`).join("");
+const FACT=n=>{if(n<0||n!==Math.floor(n)||n>170)throw new Error("fact");let r=1;for(let i=2;i<=n;i++)r*=i;return r};
+function calcEval(src){
+  let s=src.replace(/×/g,"*").replace(/÷/g,"/").replace(/−/g,"-").replace(/π/g,"pi").replace(/√/g,"sqrt");
+  const open=(s.match(/\(/g)||[]).length-(s.match(/\)/g)||[]).length;if(open>0)s+=")".repeat(open);
+  const toks=[];let i=0,m;
+  while(i<s.length){
+    const c=s[i];if(/\s/.test(c)){i++;continue}
+    const rest=s.slice(i);
+    if((m=/^(\d+\.?\d*|\.\d+)(e[+-]?\d+)?/.exec(rest))){toks.push({t:"n",v:parseFloat(m[0])});i+=m[0].length;continue}
+    if((m=/^[a-z]+/.exec(rest))){toks.push({t:"id",v:m[0]});i+=m[0].length;continue}
+    if("+-*/^()!%".includes(c)){toks.push({t:c});i++;continue}
+    throw new Error("char");
+  }
+  const rad=x=>degMode?x*Math.PI/180:x,deg=x=>degMode?x*180/Math.PI:x;
+  const FN={
+    sin:x=>Math.sin(rad(x)),cos:x=>Math.cos(rad(x)),
+    tan:x=>{const r=rad(x);if(Math.abs(Math.cos(r))<1e-12)throw new Error("tan");return Math.tan(r)},
+    asin:x=>{if(Math.abs(x)>1)throw new Error("d");return deg(Math.asin(x))},acos:x=>{if(Math.abs(x)>1)throw new Error("d");return deg(Math.acos(x))},atan:x=>deg(Math.atan(x)),
+    ln:x=>{if(x<=0)throw new Error("d");return Math.log(x)},log:x=>{if(x<=0)throw new Error("d");return Math.log10(x)},
+    sqrt:x=>{if(x<0)throw new Error("d");return Math.sqrt(x)},abs:Math.abs,exp:Math.exp
+  };
+  let p=0;const peek=()=>toks[p],next=()=>toks[p++];
+  const expr=()=>{let v=term();while(peek()&&(peek().t==="+"||peek().t==="-")){const o=next().t,r=term();v=o==="+"?v+r:v-r}return v};
+  const term=()=>{let v=unary();for(;;){const k=peek();if(!k)break;
+    if(k.t==="*"||k.t==="/"){next();const r=unary();v=k.t==="*"?v*r:v/r}
+    else if(k.t==="n"||k.t==="id"||k.t==="("){v*=unary()}else break}return v};
+  const unary=()=>{const k=peek();if(k&&k.t==="-"){next();return -unary()}if(k&&k.t==="+"){next();return unary()}return power()};
+  const power=()=>{const b=post();if(peek()&&peek().t==="^"){next();return Math.pow(b,unary())}return b};
+  const post=()=>{let v=primary();while(peek()&&(peek().t==="!"||peek().t==="%")){v=next().t==="!"?FACT(v):v/100}return v};
+  const primary=()=>{
+    const k=next();if(!k)throw new Error("end");
+    if(k.t==="n")return k.v;
+    if(k.t==="("){const v=expr();if(!peek()||peek().t!==")")throw new Error("paren");next();return v}
+    if(k.t==="id"){
+      if(k.v==="pi")return Math.PI;if(k.v==="e")return Math.E;if(k.v==="ans")return ans;
+      const f=FN[k.v];if(!f)throw new Error("fn");
+      if(!peek()||peek().t!=="(")throw new Error("paren");next();
+      const v=expr();if(!peek()||peek().t!==")")throw new Error("paren");next();return f(v);
+    }
+    throw new Error("syntax");
+  };
+  const r=expr();if(p<toks.length)throw new Error("extra");
+  if(!isFinite(r)||isNaN(r))throw new Error("math");
+  return Math.abs(r)<1e-12?0:parseFloat(r.toPrecision(12));
+}
+function calcPreview(){
+  const v=$("#calcIn").value.trim();
+  if(!v){$("#calcOut").textContent="0";return}
+  try{$("#calcOut").textContent=String(calcEval(v));$("#calcOut").style.color=""}catch(e){$("#calcOut").textContent="…";$("#calcOut").style.color="var(--muted)"}
+}
+function calcInsert(t){
+  const inp=$("#calcIn");
+  if(justEq){justEq=false;if(/^[\d.(πe]|^[a-z√]/.test(t))inp.value=""}
+  const a=inp.selectionStart??inp.value.length,b=inp.selectionEnd??a;
+  inp.value=inp.value.slice(0,a)+t+inp.value.slice(b);
+  const pos=a+t.length;inp.setSelectionRange(pos,pos);inp.focus();calcPreview();
+}
+function calcEquals(){
+  const v=$("#calcIn").value.trim();if(!v)return;
+  try{
+    const r=calcEval(v);ans=r;justEq=true;
+    $("#calcOut").textContent=String(r);$("#calcOut").style.color="";
+    hist=[{e:v,r:String(r)},...hist.filter(h=>h.e!==v)].slice(0,8);store.set("calcHist",hist);
+    $("#calcIn").value=String(r);renderHist();$("#ansShow").textContent="Ans = "+r;
+  }catch(e){$("#calcOut").textContent=L("त्रुटि","Error");$("#calcOut").style.color="var(--red)"}
+}
+$$("#keys .key").forEach(b=>b.onclick=()=>{
+  const k=b.dataset.k,inp=$("#calcIn");
+  if(k==="EQ")return calcEquals();
+  if(k==="AC"){inp.value="";justEq=false;$("#calcOut").textContent="0";$("#calcOut").style.color="";return}
+  if(k==="BS"){const a=inp.selectionStart??inp.value.length,bb=inp.selectionEnd??a;
+    if(a!==bb)inp.value=inp.value.slice(0,a)+inp.value.slice(bb);else if(a>0){inp.value=inp.value.slice(0,a-1)+inp.value.slice(a);inp.setSelectionRange(a-1,a-1)}
+    justEq=false;calcPreview();return}
+  calcInsert(k);
+});
+$("#calcIn").oninput=()=>{justEq=false;calcPreview()};
+$("#calcIn").onkeydown=e=>{if(e.key==="Enter"){e.preventDefault();calcEquals()}};
+$("#degBtn").onclick=()=>{degMode=!degMode;store.set("deg",degMode);calcLabels();calcPreview()};
+function calcLabels(){
+  $("#degBtn").textContent=degMode?L("डिग्री (DEG)","Degrees (DEG)"):L("रेडियन (RAD)","Radians (RAD)");
+  $("#ansShow").textContent="Ans = "+ans;
+  renderHist();
+}
+function renderHist(){
+  $("#calcHist").innerHTML=hist.length?hist.map((h,i)=>`<button type="button" data-i="${i}"><span class="muted">${esc(h.e)} =</span> <b>${esc(h.r)}</b></button>`).join(""):`<p class="muted">${L("अहिलेसम्म कुनै गणना छैन।","No calculations yet.")}</p>`;
+  $$("#calcHist button").forEach(b=>b.onclick=()=>{const h=hist[+b.dataset.i];$("#calcIn").value=h.e;justEq=false;calcPreview()});
+}
+
+/* ---------- study time tracker ---------- */
+let slog=store.get("studyLog",{}),sgoal=store.get("studyGoal",120),sw=store.get("sw",null),swTimer=null,clearArm=false;
+const STSUBJ=SUBJECTS.filter(x=>x!=="All").concat(["Other"]);
+const fmtDur=sec=>{const m=Math.round(sec/60),h=Math.floor(m/60);return h?`${nd(h)}h ${nd(m%60)}m`:`${nd(m)}m`};
+const dayTotal=k=>Object.values(slog[k]||{}).reduce((a,b)=>a+b,0);
+function addStudy(subj,sec){
+  if(!(sec>0))return;const k=dkey(new Date());
+  slog[k]=slog[k]||{};slog[k][subj]=(slog[k][subj]||0)+sec;store.set("studyLog",slog);renderStudy();
+}
+function swDraw(){
+  if(!sw){$("#swShow").textContent="00:00:00";return}
+  const s=Math.floor((Date.now()-sw.start)/1000);
+  $("#swShow").textContent=pad(Math.floor(s/3600))+":"+pad(Math.floor(s%3600/60))+":"+pad(s%60);
+}
+function swSync(){
+  clearInterval(swTimer);swTimer=null;
+  $("#swBtn").textContent=sw?L("रोक्नुहोस् र सेभ गर्नुहोस्","Stop and save"):L("सुरु","Start");
+  if(sw){$("#stSubj").value=sw.subj;$("#stSubj").disabled=true;swTimer=setInterval(swDraw,1000)}else $("#stSubj").disabled=false;
+  swDraw();
+}
+$("#swBtn").onclick=()=>{
+  if(sw){const sec=Math.round((Date.now()-sw.start)/1000);addStudy(sw.subj,sec);sw=null;store.set("sw",null)}
+  else{sw={start:Date.now(),subj:$("#stSubj").value};store.set("sw",sw)}
+  swSync();
+};
+$("#stAdd").onclick=()=>{const m=+$("#stMin").value;if(m>0&&m<=600){addStudy($("#stSubj").value,m*60);$("#stMin").value=""}else $("#stMin").focus()};
+$("#stGoal").oninput=()=>{const g=+$("#stGoal").value;if(g>=10){sgoal=g;store.set("studyGoal",g);renderStudy(true)}};
+$("#stClear").onclick=()=>{
+  if(!clearArm){clearArm=true;$("#stClear").textContent=L("पक्का? फेरि थिच्नुहोस्","Sure? Tap again");setTimeout(()=>{clearArm=false;renderStudy()},4000);return}
+  slog={};store.set("studyLog",slog);clearArm=false;renderStudy();
+};
+function renderStudy(keepGoalInput){
+  const cur=$("#stSubj").value;
+  $("#stSubj").innerHTML=STSUBJ.map(s=>`<option>${esc(s)}</option>`).join("");
+  $("#stSubj").value=sw?sw.subj:(STSUBJ.includes(cur)?cur:STSUBJ[0]);
+  if(!keepGoalInput)$("#stGoal").value=sgoal;
+  $("#stClear").textContent=L("लग खाली गर्नुहोस्","Clear log");
+  const now=new Date(),tk=dkey(now),tot=dayTotal(tk),pct=Math.min(100,Math.round(tot/60/sgoal*100));
+  $("#stTotal").textContent=fmtDur(tot);
+  $("#stProg").innerHTML=`<i style="width:${pct}%"></i>`;$("#stProg").setAttribute("aria-valuenow",pct);
+  $("#stMsg").textContent=tot===0?L("आजको पहिलो सत्र सुरु गर्नुहोस्।","Start your first session today."):pct>=100?L("लक्ष्य पूरा भयो। राम्रो काम!","Goal reached. Well done!"):L(`लक्ष्यको ${nd(pct)}% पूरा। अझै ${nd(Math.max(0,sgoal-Math.round(tot/60)))} मिनेट बाँकी।`,`${pct}% of your goal. ${Math.max(0,sgoal-Math.round(tot/60))} minutes to go.`);
+  // 7 days
+  const days=[];for(let i=6;i>=0;i--){const d=new Date(now.getFullYear(),now.getMonth(),now.getDate()-i);days.push({d,k:dkey(d),t:dayTotal(dkey(d))})}
+  const mx=Math.max(sgoal*60,...days.map(x=>x.t));
+  $("#stBars").innerHTML=days.map(x=>`<div class="bar" title="${fmtDur(x.t)}"><small>${x.t?fmtDur(x.t):""}</small><i style="height:${Math.round(x.t/mx*100*0.78)}%"></i><small>${WDS[lang][x.d.getDay()]}</small></div>`).join("");
+  // by subject (7 days)
+  const by={};days.forEach(x=>Object.entries(slog[x.k]||{}).forEach(([s,v])=>by[s]=(by[s]||0)+v));
+  const rows=Object.entries(by).sort((a,b)=>b[1]-a[1]),top=rows[0]?rows[0][1]:1;
+  $("#stBy").innerHTML=rows.length?rows.map(([s,v])=>`<div style="margin-bottom:8px"><div class="row" style="justify-content:space-between"><span>${esc(s)}</span><b>${fmtDur(v)}</b></div><div class="prog" style="height:8px;margin:2px 0"><i style="width:${Math.round(v/top*100)}%;background:var(--blue)"></i></div></div>`).join(""):`<p class="muted">${L("अहिलेसम्म कुनै अध्ययन लग छैन।","No study logged yet.")}</p>`;
+  // streak
+  let st=0;for(let i=0;i<400;i++){const d=new Date(now.getFullYear(),now.getMonth(),now.getDate()-i);if(dayTotal(dkey(d))>0)st++;else if(i===0)continue;else break}
+  $("#stStreak").textContent=st?L(`लगातार ${nd(st)} दिन पढ्दै हुनुहुन्छ।`,`${st}-day study streak.`):"";
+  swSync();
+}
+
+/* ---------- accounts (stored on this device) ---------- */
+const USER_KEYS=["myNotes","stream","gRows","exam","tasks","sch","bestQuiz","calcHist","deg","studyLog","studyGoal","sw","calEv"];
+const LEVELS=[["Class 8","कक्षा ८"],["Class 9","कक्षा ९"],["Class 10 (SEE)","कक्षा १० (SEE)"],["Class 11","कक्षा ११"],["Class 12","कक्षा १२"],["College / University","कलेज / विश्वविद्यालय"],["Teacher","शिक्षक"],["Other","अन्य"]];
+let acMode="in",acMsg=null,failN=0,lockUntil=0;
+const users=()=>store.get("users",{});
+const rndHex=n=>{const a=new Uint8Array(n);try{crypto.getRandomValues(a)}catch(e){for(let i=0;i<n;i++)a[i]=Math.floor(Math.random()*256)}return[...a].map(b=>b.toString(16).padStart(2,"0")).join("")};
+async function hashPw(pw,salt,weak){
+  if(!weak){
+    try{
+      if(window.crypto&&crypto.subtle){
+        const enc=new TextEncoder(),key=await crypto.subtle.importKey("raw",enc.encode(pw),"PBKDF2",false,["deriveBits"]);
+        const bits=await crypto.subtle.deriveBits({name:"PBKDF2",salt:enc.encode(salt),iterations:100000,hash:"SHA-256"},key,256);
+        return[...new Uint8Array(bits)].map(b=>b.toString(16).padStart(2,"0")).join("");
+      }
+    }catch(e){}
+  }
+  let h=5381;const t=salt+pw;for(let i=0;i<t.length;i++)h=((h<<5)+h+t.charCodeAt(i))|0;return"w"+(h>>>0).toString(16);
+}
+const checkPw=async(u,pw)=>(await hashPw(pw,u.salt,u.hash.startsWith("w")))===u.hash;
+
+function loadUserData(){
+  clearInterval(swTimer);swTimer=null;
+  mine=store.get("myNotes",[]);
+  stream=store.get("stream","Science");
+  rows=store.get("gRows",null)||STREAMS[stream].map(([n,c])=>({n,c,t:"",i:""}));
+  tasks=store.get("tasks",[]);schDone=store.get("sch",[]);
+  hist=store.get("calcHist",[]);degMode=store.get("deg",true);ans=0;justEq=false;$("#calcIn").value="";$("#calcOut").textContent="0";
+  slog=store.get("studyLog",{});sgoal=store.get("studyGoal",120);sw=store.get("sw",null);
+  evs=store.get("calEv",{});
+  exLoad();
+  renderStreams();renderRows();renderMine();exDraw();tdDraw();qStart();cvBs();
+  applyLang();
+}
+function setUser(u){uid=u;store.set("session",u);loadUserData()}
+const initial=n=>(n||"?").trim().charAt(0).toUpperCase();
+function curUser(){return uid?users()[uid]:null}
+
+const AVATARS=[["🎓","Graduate","स्नातक"],["📚","Books","किताब"],["🔬","Science","विज्ञान"],["🚀","Rocket","रकेट"],["💡","Idea","विचार"],["🧮","Maths","गणित"],["🏔️","Himalaya","हिमाल"],["🖋️","Writer","लेखक"],["🌱","Growth","विकास"],["🎯","Focus","लक्ष्य"]];
+function avatarHTML(u,cls){
+  cls=cls||"";
+  if(u.img&&u.av==="img")return `<div class="avatar ${cls}" aria-hidden="true"><img src="${esc(u.img)}" alt=""></div>`;
+  if(u.av&&u.av!=="initial"&&u.av!=="img")return `<div class="avatar em ${cls}" aria-hidden="true">${esc(u.av)}</div>`;
+  return `<div class="avatar ${cls}" aria-hidden="true">${esc(initial(u.name))}</div>`;
+}
+function photoToData(file){return new Promise((res,rej)=>{
+  if(!file||!/^image\//.test(file.type))return rej(new Error("type"));
+  const url=URL.createObjectURL(file),img=new Image();
+  img.onload=()=>{try{const S=160,c=document.createElement("canvas");c.width=c.height=S;const x=c.getContext("2d");
+    const m=Math.min(img.width,img.height),sx=(img.width-m)/2,sy=(img.height-m)/2;x.drawImage(img,sx,sy,m,m,0,0,S,S);
+    URL.revokeObjectURL(url);res(c.toDataURL("image/jpeg",.82))}catch(e){rej(e)}};
+  img.onerror=()=>{URL.revokeObjectURL(url);rej(new Error("load"))};img.src=url})}
+function setAvatar(av,img){
+  const all=users(),u=all[uid];if(!u)return;
+  u.av=av;if(img!==undefined)u.img=img;store.set("users",all);
+  $("#avBig").innerHTML=avatarHTML(u,"lg");renderAccountBtn();
+  $$("#avGrid button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.av===av));
+  say("ok",L("प्रोफाइल फोटो बदलियो।","Profile picture updated."));
+}
+function renderAccountBtn(){
+  const u=curUser();
+  $("#acctBtn").innerHTML=u?avatarHTML(u,"sm")+esc(u.name.split(" ")[0].slice(0,10)):esc(L("लगइन","Log in"));
+  $("#heroAcct").textContent=u?L("मेरो खाता","My account"):L("खाता बनाउनुहोस्","Create account");
+  $("#greet").textContent=u?L("नमस्ते, ","Hello, ")+u.name+"!":"";
+}
+function say(type,text){acMsg={type,text};const m=$("#acMsg");if(m){m.className="msg "+type;m.textContent=text}}
+
+async function doSignup(){
+  const name=$("#suName").value.trim(),un=$("#suUser").value.trim().toLowerCase(),pw=$("#suPw").value,pw2=$("#suPw2").value,lv=$("#suLevel").value;
+  if(name.length<2)return say("err",L("आफ्नो नाम लेख्नुहोस्।","Enter your name."));
+  if(!/^[a-z0-9_.]{3,20}$/.test(un))return say("err",L("प्रयोगकर्ता नाम ३–२० अक्षर: a-z, 0-9, _ वा . मात्र।","Username must be 3–20 characters: a-z, 0-9, _ or . only."));
+  if(pw.length<6)return say("err",L("पासवर्ड कम्तीमा ६ अक्षरको हुनुपर्छ।","Password must be at least 6 characters."));
+  if(pw!==pw2)return say("err",L("दुई पासवर्ड मिलेनन्।","The two passwords do not match."));
+  const all=users();if(all[un])return say("err",L("यो प्रयोगकर्ता नाम पहिल्यै प्रयोगमा छ।","That username is already taken."));
+  const salt=rndHex(16),hash=await hashPw(pw,salt);
+  all[un]={name,level:lv,salt,hash,created:Date.now()};store.set("users",all);
+  if($("#suKeep").checked)USER_KEYS.forEach(k=>{try{const v=localStorage.getItem("efa:u:guest:"+k);if(v!==null)localStorage.setItem("efa:u:"+un+":"+k,v)}catch(e){}});
+  setUser(un);acMsg=null;renderAccount();say("ok",L("खाता बन्यो। स्वागत छ!","Account created. Welcome!"));
+}
+async function doLogin(){
+  if(Date.now()<lockUntil)return say("err",L("धेरै गलत प्रयास। केही बेरपछि फेरि प्रयास गर्नुहोस्।","Too many wrong attempts. Try again in a little while."));
+  const un=$("#liUser").value.trim().toLowerCase(),pw=$("#liPw").value,u=users()[un];
+  if(!u||!(await checkPw(u,pw))){failN++;if(failN>=5){lockUntil=Date.now()+30000;failN=0}return say("err",L("प्रयोगकर्ता नाम वा पासवर्ड मिलेन।","Username or password is incorrect."))}
+  failN=0;setUser(un);acMsg=null;renderAccount();say("ok",L("लगइन भयो।","Logged in."));
+}
+function doLogout(){setUser(null);acMsg=null;acMode="in";renderAccount()}
+async function doSave(){
+  const all=users(),u=all[uid],name=$("#pfName").value.trim();
+  if(name.length<2)return say("err",L("आफ्नो नाम लेख्नुहोस्।","Enter your name."));
+  u.name=name;u.level=$("#pfLevel").value;store.set("users",all);renderAccount();say("ok",L("प्रोफाइल सेभ भयो।","Profile saved."));
+}
+async function doPw(){
+  const all=users(),u=all[uid],cur=$("#pwCur").value,nw=$("#pwNew").value;
+  if(!(await checkPw(u,cur)))return say("err",L("हालको पासवर्ड मिलेन।","Current password is incorrect."));
+  if(nw.length<6)return say("err",L("नयाँ पासवर्ड कम्तीमा ६ अक्षरको हुनुपर्छ।","New password must be at least 6 characters."));
+  u.salt=rndHex(16);u.hash=await hashPw(nw,u.salt);store.set("users",all);
+  $("#pwCur").value="";$("#pwNew").value="";say("ok",L("पासवर्ड बदलियो।","Password changed."));
+}
+function doBackup(){
+  const data={};USER_KEYS.forEach(k=>{const v=store.get(k,null);if(v!==null)data[k]=v});
+  const u=curUser(),json=JSON.stringify({app:"efa",v:1,name:u?u.name:"Guest",data});
+  $("#bkText").value=json;$("#bkText").select();
+  try{navigator.clipboard.writeText(json).then(()=>say("ok",L("ब्याकअप कपी भयो। सुरक्षित ठाउँमा पेस्ट गरेर राख्नुहोस्।","Backup copied. Paste it somewhere safe.")),()=>say("ok",L("ब्याकअप तल देखिन्छ। कपी गर्नुहोस्।","Backup shown below. Copy it.")))}catch(e){say("ok",L("ब्याकअप तल देखिन्छ। कपी गर्नुहोस्।","Backup shown below. Copy it."))}
+}
+function doRestore(){
+  try{
+    const o=JSON.parse($("#bkText").value.trim());
+    if(o.app!=="efa"||!o.data)throw new Error("bad");
+    Object.keys(o.data).filter(k=>USER_KEYS.includes(k)).forEach(k=>store.set(k,o.data[k]));
+    loadUserData();renderAccount();say("ok",L("ब्याकअपबाट डाटा फर्कियो।","Data restored from backup."));
+  }catc
